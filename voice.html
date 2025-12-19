@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Story Generator with Voice</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #1e1e1e;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: #f5f5f5;
+      padding: 20px;
+      transition: background-image 0.6s ease-in-out;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: auto;
+      text-align: center;
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 30px;
+      border-radius: 12px;
+    }
+
+    input[type="text"], select {
+      width: 70%;
+      padding: 10px;
+      font-size: 16px;
+      margin-bottom: 15px;
+      border: none;
+      border-radius: 5px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      background-color: red;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 5px;
+    }
+
+    button:hover {
+      background-color: crimson;
+    }
+
+    #story {
+      margin-top: 30px;
+      text-align: justify;
+      line-height: 1.6;
+      white-space: pre-line;
+      background-color: rgba(255, 255, 255, 0.05);
+      padding: 20px;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>📝 AI Story Generator</h1>
+    
+    
+    <br>
+    
+    <input type="text" id="prompt" placeholder="Type a story idea (e.g., fantasy, mystery, love)">
+    <br>
+    <button onclick="generateStory()">Generate Story</button>
+    
+    <div>
+      <button onclick="pauseStory()">Pause</button>
+      <button onclick="resumeStory()">Resume</button>
+      <button onclick="stopStory()">Stop</button>
+      <button onclick="replayStory()">Replay</button>
+    </div>
+
+    <div id="story"></div>
+  </div>
+
+  <script>
+    let utterance;
+    let fullStoryText = "";
+
+    function getRandom(arr) {
+      return arr[Math.floor(Math.random() * arr.length)];
+    }
+
+    function changeBackground(prompt) {
+      const lowerPrompt = prompt.toLowerCase();
+      let url = "";
+
+      if (lowerPrompt.includes("fantasy")) {
+        url = "url('https://images.unsplash.com/photo-1503437313881-503a91226402?auto=format&fit=crop&w=1600&q=80')";
+      } else if (lowerPrompt.includes("sci-fi")) {
+        url = "url('https://images.unsplash.com/photo-1581091215367-59c1cecf8e32?auto=format&fit=crop&w=1600&q=80')";
+      } else if (lowerPrompt.includes("love")) {
+        url = "url('https://images.unsplash.com/photo-1520975916090-3105956fcd6b?auto=format&fit=crop&w=1600&q=80')";
+      } else if (lowerPrompt.includes("horror")) {
+        url = "url('https://images.unsplash.com/photo-1508675801603-805c876b67e2?auto=format&fit=crop&w=1600&q=80')";
+      } else if (lowerPrompt.includes("travel")) {
+        url = "url('https://images.unsplash.com/photo-1526481280690-9c26cf3207e0?auto=format&fit=crop&w=1600&q=80')";
+      } else {
+        url = "url('https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?auto=format&fit=crop&w=1600&q=80')";
+      }
+
+      document.body.style.backgroundImage = url;
+    }
+
+    function speak(text) {
+      const langCode = document.getElementById("language").value;
+      utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = langCode;
+      utterance.rate = 1;
+      utterance.pitch = 1;
+      utterance.volume = 1;
+      window.speechSynthesis.cancel();
+      window.speechSynthesis.speak(utterance);
+    }
+
+    function pauseStory() {
+      window.speechSynthesis.pause();
+    }
+
+    function resumeStory() {
+      window.speechSynthesis.resume();
+    }
+
+    function stopStory() {
+      window.speechSynthesis.cancel();
+    }
+
+    function replayStory() {
+      stopStory();
+      speak(fullStoryText);
+    }
+
+    function generateStory() {
+      const prompt = document.getElementById("prompt").value.trim();
+      if (!prompt) {
+        alert("Please enter a story idea.");
+        return;
+      }
+
+      changeBackground(prompt);
+
+      const names = ["Luna", "Kai", "Astra", "Riven", "Nova", "Arav", "Zara", "Orin", "Mira"];
+      const places = [
+        "the floating isles of Zephyria",
+        "the underground city of Velmor",
+        "the stormy mountains of Eldrath",
+        "the eternal forest of Nymeria",
+        "the forgotten ruins of Serakor"
+      ];
+      const magicalItems = [
+        "a crystal that bends time",
+        "a sword forged from a fallen star",
+        "a crown that controls beasts",
+        "an orb of lost memories",
+        "a book that writes the future"
+      ];
+      const creatures = [
+        "a talking wolf",
+        "a dragon with silver scales",
+        "a shapeshifting crow",
+        "a phoenix of dusk",
+        "a golem made of roots"
+      ];
+
+      const name = getRandom(names);
+      const place = getRandom(places);
+      const item = getRandom(magicalItems);
+      const creature = getRandom(creatures);
+
+      const intro = `In a world unlike ours, where ${prompt} shaped the land, there lived a young dreamer named ${name}. From childhood, ${name} had heard whispers of an ancient prophecy hidden in ${place}.`;
+
+      const middle = `
+One stormy evening, ${name} stumbled upon ${item} hidden beneath the old temple. The object pulsed with energy, and as ${name} touched it, visions flooded their mind — visions of battles, betrayal, and a destiny that demanded courage.
+
+Guided by those dreams, ${name} ventured across dangerous lands and encountered ${creature}, who became both a guardian and friend. The bond between them grew as they faced trials: cursed waters, burning sands, and illusionary forests.
+
+Everywhere they went, the legends of the past came alive. Villagers spoke of a hero who would return balance to the realms, and many believed ${name} was the one.`;
+
+      const climax = `
+Their greatest test came in the Valley of Echoes, where fear itself took form. ${name} stood alone against shadows of their past, until the voice of the ${creature} reminded them who they were.
+
+With newfound strength, ${name} embraced their purpose and unlocked the full power of ${item}. Lightning danced around them as they faced the final gate — and won.`;
+
+      const ending = `
+Years later, songs were sung of ${name}'s journey. ${place} was no longer a land of legend, but a symbol of hope. And on certain nights, when the stars align, some say you can still see ${name} riding with ${creature}, guarding the balance of the world — all sparked by a dream born from a single idea: "${prompt}".`;
+
+      fullStoryText = `${intro}\n\n${middle}\n\n${climax}\n\n${ending}`;
+      document.getElementById("story").innerText = fullStoryText;
+      speak(fullStoryText);
+    }
+  </script>
+</body>
+</html>

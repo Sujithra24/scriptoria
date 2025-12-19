@@ -1,0 +1,2861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tea Shop Stories</title>
+ <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'en,hi,ta,te,ml,fr,es',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+      }, 'google_translate_element');
+    }
+   
+
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:Verdana,sans-serif;
+  color:#3e2723;
+  text-align:center;
+  background-image:url("WhatsApp\ Image\ 2025-07-08\ at\ 13.34.59.jpeg");
+  background-size: cover;
+  /* make image cover full screen */
+  background-repeat: no-repeat;
+  /*prevent repeat*/
+  background-position: center center;
+  /*center it*/
+  background-attachment: fixed;
+  /*fix image when scrolling*/
+  min-height: 100vh;
+  /*ensure body fills the screen*/
+}
+h1{margin:30px 0 10px;font-size:32px}
+
+/* ---------- front-page buttons ---------- */
+#genreButtons{margin:50px auto}
+#genreButtons button{display:block;width:80%;max-width:250px;margin:30px auto;
+  padding:23px 21px;font-size:18px;background:#424242;color: #ffffff;border:0;border-radius:10px;box-shadow: 2px 2px 6px rgba(0,0,0,0.2); cursor:pointer;transition:.3s}
+#genreButtons button:hover{background:#616161;color: #ffeb3b;}
+
+
+/* ---------- moving headings ---------- */
+@keyframes slide{0%{transform:translateX(100%)}100%{transform:translateX(-100%)}}
+.moving-heading{display:none;overflow:hidden;white-space:nowrap;margin:18px 0;padding:10px;font-size:20px;font-weight:bold;border-radius:8px}
+.moving-heading span{display:inline-block;animation:slide 10s linear infinite}
+.heading-comedy   {background:#fff9c4;color:#ff6f00}
+.heading-love     {background:rgba(255,192,203,0.7);color:#ad1457}
+.heading-horror   {background:rgba(0,0,0,0.7);color:#ff5252}
+.heading-fantasy  {background:rgba(255,255,255,0.6);color:#4a145c}
+.heading-emotional{background:rgba(255,204,229,0.7);color:#880e4f}
+.heading-thriller {background:rgba(0,0,0,0.4);color:#f9f9f9}
+.heading-adventure{background:#e0f7fa;color:#00695c}
+
+/* ---------- card grid ---------- */
+.cards-container{display:none;max-width:960px;margin:0 auto;padding:0 20px;
+  gap:20px;grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}
+.card{background:#e0f7fa;border-radius:12px;padding:10px;box-shadow:0 4px 10px rgba(0,150,136,0.2);background-size: cover;background-position: center;
+  cursor:pointer;transition:.3s}
+.card:hover{transform:scale(1.05)}
+.card img{width:100%;height:120px;object-fit:cover;border-radius:8px}
+.card p{margin:8px 0 0;font-weight:bold}
+
+/* ---------- story container ---------- */
+.container{display:none;max-width:700px;margin:30px auto;padding:20px;background:#fff3e0;
+  border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.1);text-align:left}
+.container h2{margin-top:0}
+.container img{width:100%;max-width:320px;border-radius:8px;margin:10px 0}
+
+/* ---------- back buttons ---------- */
+#backCards{display:none;position:fixed;bottom:24px;left:50%;transform:translateX(-50%);
+  padding:12px 26px;background:#fff9c4;color: #4e342e;;border:0;border-radius:12px;font-weight:bold;cursor:pointer}
+#backCards:hover{background:#fff176;color:#212121}
+.storyBack{display:none;margin:20px auto 0;padding:10px 22px;background:#f3e5f5;color: #4a148c;border:0;border-radius:10px;border-radius: 2px 2px 6px rgba(0,0,0,0.1);
+  font-size:14px;box-shadow: 3px 3px 10px rgba(0,0,0,0.2); cursor:pointer}
+.storyBack:hover{background:#ffca28;color:#ffffff;box-shadow: 3px 3px 10px rgba(0,0,0,0.2);}
+</style>
+</head>
+<body>
+  <div id="google_translate_element"></div>
+        
+      </div>
+
+
+<!-- ---------- FRONT PAGE BUTTONS ---------- -->
+<div id="genreButtons">
+  <button onclick="openGenre('comedy')">Comedy</button>
+  <button onclick="openGenre('love')">Love</button>
+  <button onclick="openGenre('horror')">Horror</button>
+  <button onclick="openGenre('fantasy')">Fantasy</button>
+  <button onclick="openGenre('emotional')">Emotional</button>
+  <button onclick="openGenre('thriller')">Thriller</button>
+  <button onclick="openGenre('adventure')">Adventure</button>
+</div>
+
+<!-- ---------- MOVING HEADINGS ---------- -->
+<div class="moving-heading heading-comedy"   id="comedyHeading"   ><span>&nbsp;&nbsp;"Low on stress, high on silly. Welcome aboard! 🎭"&nbsp;&nbsp;</span></div>
+<div class="moving-heading heading-love"     id="loveHeading"     ><span>&nbsp;&nbsp;"🔮 The Stars Remember What We Try to Forget”&nbsp;&nbsp;</span></div>
+<div class="moving-heading heading-horror"   id="horrorHeading"   ><span>&nbsp;&nbsp;"👻 They say the house is empty... but something still breathes inside. 💀"&nbsp;&nbsp;</span></div>
+<div class="moving-heading heading-fantasy"  id="fantasyHeading"  ><span>&nbsp;&nbsp;“In the Space Between Stars, Stories Are Born ✨📜"&nbsp;&nbsp;</span></div>
+<div class="moving-heading heading-emotional"id="emotionalHeading"><span>&nbsp;&nbsp;“Grief Walks with Magic in Quiet Places 🌙🖤"&nbsp;&nbsp;</span></div>
+<div class="moving-heading heading-thriller" id="thrillerHeading" ><span>&nbsp;&nbsp;“Every Step You Take, I’m Two Ahead 🕵‍♂"&nbsp;&nbsp;</span></div>
+<div class="moving-heading heading-adventure"id="adventureHeading"><span>&nbsp;&nbsp;"Run wild, chase horizons, rewrite your own legend ⚡"&nbsp;&nbsp;</span></div>
+
+<!-- ========================================================== -->
+<!-- ==================   CARD GRIDS   ======================== -->
+<!-- ========================================================== -->
+
+<!-- === Each grid has exactly 5 cards (7 genres = 35 cards) === -->
+<!-- IMAGES: replace placeholders anytime                      -->
+<!-- COMEDY CARDS -->
+<div id="cards-comedy" class="cards-container">
+  <div class="card" onclick="openStory('story1')"><img src="WhatsApp Image 2025-07-10 at 14.10.04_cdc8d0db.jpg"><p>The Bus Stop Philosopher</p></div>
+  <div class="card" onclick="openStory('story2')"><img src="WhatsApp Image 2025-07-10 at 14.10.05_144565d3.jpg"><p>The Lost Slipper</p></div>
+  <div class="card" onclick="openStory('story3')"><img src="WhatsApp Image 2025-07-10 at 14.10.13_1e1e70ac.jpg"><p>The Umbrella Exchange</p></div>
+  <div class="card" onclick="openStory('story4')"><img src="WhatsApp Image 2025-07-10 at 14.10.13_fbe470dc.jpg"><p>The Chicken Chase</p></div>
+  <div class="card" onclick="openStory('story5')"><img src="theif.jpg"><p>The Umbrella Thief</p></div>
+</div>
+
+<!-- LOVE CARDS -->
+<div id="cards-love" class="cards-container">
+  <div class="card" onclick="openStory('story6')"><img src="WhatsApp Image 2025-07-10 at 14.11.03_df477ef1.jpg"><p>Two Wheels and a Heartbeat</p></div>
+  <div class="card" onclick="openStory('story7')"><img src="WhatsApp Image 2025-07-10 at 14.11.04_70af0ad7.jpg"><p>Gravity in the Rain</p></div>
+  <div class="card" onclick="openStory('story8')"><img src="WhatsApp Image 2025-07-10 at 14.11.46_d514a665.jpg"><p>Beneath the Olive Tree</p></div>
+  <div class="card" onclick="openStory('story9')"><img src="WhatsApp Image 2025-07-10 at 14.11.47_fc5bb579.jpg"><p>Paper Planes And Hidden Notes</p></div>
+  <div class="card" onclick="openStory('story10')"><img src="WhatsApp Image 2025-07-10 at 14.11.47_8d91db94.jpg"><p>Once Upon a Look</p></div>
+</div>
+
+<!-- HORROR CARDS -->
+<div id="cards-horror" class="cards-container">
+  <div class="card" onclick="openStory('story11')"><img src="WhatsApp Image 2025-07-10 at 14.12.48_70e6534c.jpg"><p>The Whispering Well</p></div>
+  <div class="card" onclick="openStory('story12')"><img src="door.jpg"><p>The Room with No Door</p></div>
+  <div class="card" onclick="openStory('story13')"><img src="train.jpg"><p>The Forgotten Train</p></div>
+  <div class="card" onclick="openStory('story14')"><img src="smile.jpg"><p>The Reflection Smiled</p></div>
+  <div class="card" onclick="openStory('story15')"><img src="lake.jpg"><p>The Lantern On The Lake</p></div>
+</div>
+
+<!-- FANTASY CARDS -->
+<div id="cards-fantasy" class="cards-container">
+  <div class="card" onclick="openStory('story16')"><img src="key.jpg"><p>The Monsoonlight Key</p></div>
+  <div class="card" onclick="openStory('story17')"><img src="tree.jpg"><p>The Ember Tree</p></div>
+  <div class="card" onclick="openStory('story18')"><img src="clck.jpg"><p>The Clockmaker’s Orchard</p></div>
+  <div class="card" onclick="openStory('story19')"><img src="monsoon.jpg"><p>The Moonstone Prophecy</p></div>
+  <div class="card" onclick="openStory('story20')"><img src="mirror.jpg"><p>The Mirror of Many Faces</p></div>
+</div>
+
+<!-- EMOTIONAL CARDS -->
+<div id="cards-emotional" class="cards-container">
+  <div class="card" onclick="openStory('story21')"><img src="lived.jpg"><p>Where the Light Once Lived</p></div>
+  <div class="card" onclick="openStory('story22')"><img src="tea.jpg"><p>The Last Cup of Tea</p></div>
+  <div class="card" onclick="openStory('story23')"><img src="sky.jpg"><p>The Sky Without You</p></div>
+  <div class="card" onclick="openStory('story24')"><img src="fire.jpg"><p>When The Light Flickered</p></div>
+  <div class="card" onclick="openStory('story25')"><img src="bench.jpg"><p>Bench by The Lake</p></div>
+</div>
+
+<!-- THRILLER CARDS -->
+<div id="cards-thriller" class="cards-container">
+  <div class="card" onclick="openStory('story26')"><img src="silent.jpg"><p>The Silent Chase</p></div>
+  <div class="card" onclick="openStory('story27')"><img src="shadow.jpg"><p>Shadows of the Last Signal</p></div>
+  <div class="card" onclick="openStory('story28')"><img src="last.jpg"><p>The Last Transmission</p></div>
+  <div class="card" onclick="openStory('story29')"><img src="echo.jpg"><p>Echoes in the Apartment 4B</p></div>
+  <div class="card" onclick="openStory('story30')"><img src="wait.jpg"><p>The Shadow That Waits</p></div>
+</div>
+
+<!-- ADVENTURE CARDS -->
+<div id="cards-adventure" class="cards-container">
+  <div class="card" onclick="openStory('story31')"><img src="crystal.jpg"><p>The Crystal Caverns</p></div>
+  <div class="card" onclick="openStory('story32')"><img src="sky.jpg"><p>The Skybound Compass</p></div>
+  <div class="card" onclick="openStory('story33')"><img src="earth.jpg"><p>Whisper of the Hallow Earth</p></div>
+  <div class="card" onclick="openStory('story34')"><img src="island.jpg"><p>The Frogotten Island</p></div>
+  <div class="card" onclick="openStory('story35')"><img src="map.jpg"><p>Jungle Earth</p></div>
+</div>
+
+<!-- ========================================================== -->
+<!-- =============== 35 FULL STORY DIVS ======================= -->
+<!-- (Add your long text & images. Buttons already correct)    -->
+<!-- For brevity, content is “…”. Replace with full stories.   -->
+<!-- ========================================================== -->
+
+<!-- COMEDY STORIES (1-5) -->
+<div id="story1"  class="container">
+  <center>
+  <h1>The Bus Stop Philosopher</h1>
+  </center>
+  <p>
+    Every city has one — that eccentric soul who turns public transport into their personal TED Talk. In our town, we had Mr. Gopal. A man with uncombed hair, two plastic bags full of newspapers, and a PhD in unsolicited wisdom.
+  </p>
+<center>
+ <img src="bus.jpg" alt="A man in old clothes lecturing passengers on a crowded bus">
+</center>
+  <p>
+    He wasn't homeless, nor crazy. He simply believed that the best classroom was a crowded city bus.
+  </p>
+
+  <p>
+    “Life,” he announced one morning, “is like this very bus. You get in late, you stand. You get in early, you sit. But either way, you reach the same stop.”
+  </p>
+
+  <p>
+    People chuckled. Some rolled their eyes. Others took notes. Literally.
+  </p>
+
+  <p>
+    Gopal had theories on everything. From relationships (“Never sit next to someone wearing too much perfume — looks good, but gives you a headache”) to economics (“If your wallet is always empty, congratulations, you're inflation-proof!”).
+  </p>
+
+  <p>
+    He once gave a 15-minute lecture on the ethics of not giving up your seat for someone just because they look tired. “Tired is a state of mind,” he argued. “Like believing this seat belongs to you.”
+  </p>
+
+  <p>
+    One day, a grumpy teenager plugged in earphones and mumbled, “Why don’t you just shut up?”
+  </p>
+
+  <p>
+    Gopal paused, looked at him, and said, “Ah, a philosopher of silence. Respect.”
+  </p>
+
+  <p>
+    The entire bus laughed. Even the ticket conductor.
+  </p>
+
+  <p>
+    Rumors spread that he once taught at a university but left to "find deeper truths on Bus Route 14."
+  </p>
+
+  <p>
+    Once, he stopped a woman from getting off at the wrong stop, saying, “Wrong bus stops are like wrong relationships — you may get off early, but you’ll still have to walk back.”
+  </p>
+
+  <p>
+    And she did walk back. Smiling.
+  </p>
+
+  <p>
+    But the funniest moment came when the bus broke down. Everyone grumbled, some called cabs. Gopal stood in the middle and said, “Ah! The universe has paused to let us reflect. Let us meditate... or at least stretch our legs.”
+  </p>
+
+  <p>
+    And just like that, a bunch of grumpy passengers were doing yoga poses beside a broken-down bus.
+  </p>
+
+  <p>
+    Mr. Gopal, the Bus Philosopher, didn't change the world. But he made traffic jams hilarious and life lessons oddly practical. And for that, we all secretly hoped our bus would break down just one more time.
+  </p>
+  <button class="storyBack" onclick="goCards()">← Back</button>
+</div>
+<div id="story2"  class="container">
+  <center>
+  <h1>The Last Slipper</h1>
+  </center>
+    <p>
+    It all began at 8:43 AM on a Monday, at Platform 3 of the Rajiv Chowk Metro Station — a place where dreams, deodorant, and decency all go to die.
+  </p>
+  <center>
+  <img src="slipper1.jpg" alt="A single slipper lying in a crowded train station" >
+  </center>
+  <p>
+    Amid the chaos, Anjali lost her left slipper. Not her phone, not her wallet — her <em>slipper</em>. She had boarded the train successfully, but her slipper hadn't made the cut.
+  </p>
+
+  <p>
+    “Nooooo!” she shrieked, as the train doors shut dramatically, separating her and her faithful Bata chappal.
+  </p>
+
+  <p>
+    In the crowd stood Rohan, holding a coffee cup and the slipper like a golden trophy. “Whose... Cinderella moment is this?” he shouted.
+  </p>
+
+  <p>
+    For a second, the crowd froze. Then someone yelled, “Leave it, bhaiya! Footwear is replaceable, love is not!”
+  </p>
+
+  <p>
+    Embarrassed but determined, Rohan posted a photo of the slipper on Instagram with the caption: <strong>#FindHerFoot</strong>. Surprisingly, it went mildly viral.
+  </p>
+
+  <p>
+    Meanwhile, Anjali hopped out at the next stop — one-legged and fuming. “I’m going to find that chappal. And maybe sue the Delhi Metro.”
+  </p>
+
+  <p>
+    By lunchtime, her friend showed her the post. “That’s your slipper, right? Wow. It has more likes than your vacation photos.”
+  </p>
+
+  <p>
+    Rohan, riding high on internet fame, returned to the same platform the next day — slipper in hand. He even brought flowers. “Just in case the universe sends her,” he told a confused security guard.
+  </p>
+
+  <p>
+    And the universe did deliver — hopping in on her right foot, Anjali approached him and glared. “You kept it?”
+  </p>
+
+  <p>
+    “Of course,” Rohan grinned. “It’s not every day you meet someone with such... unique footwear velocity.”
+  </p>
+
+  <p>
+    She rolled her eyes. “Thanks. I guess. And for the record, I don’t normally lose my shoes. Only my patience.”
+  </p>
+
+  <p>
+    “Perfect,” Rohan replied. “I lose my charger every day. We’re made for each other.”
+  </p>
+
+  <p>
+    They laughed. She took her slipper back. And because the universe has a sense of humor, the train arrived just then — and this time, both Anjali and her slipper made it inside.
+  </p>
+
+  <p>
+    Rohan followed. They didn’t exchange numbers. But they did exchange memes later that evening — the beginning of something unexpectedly hilarious.
+  </p>
+  <button class="storyBack" onclick="goCards()">← Back</button>
+</div>
+<div id="story3"  class="container">
+  <center>
+  <h1>The Umbrella Exchange</h1>
+  </center>
+    <p>
+    It was one of those dramatic monsoon days — puddles forming symphonies and chai stalls doing record business.
+  </p>
+  <center>
+  <img src="umberlla.jpg" alt="Two mismatched umbrellas on a rainy day at a cafe">
+  </center>
+  <p>
+    Nisha, fresh out of a disastrous meeting, grabbed her umbrella from the café stand and stormed outside. The rain didn’t even try to be gentle.
+  </p>
+
+  <p>
+    Twenty minutes later, she realized something was off. Her umbrella had a neon green duck on top. Hers did not. And this one smelled oddly like mango pickle.
+  </p>
+
+  <p
+    Somewhere else in the city, Arjun stood at a bus stop, staring at the floral pink umbrella he had unknowingly picked up. His was solid black. This one looked like it belonged to a 5-year-old princess.
+  </p>
+
+  <p>
+    “Excuse me!” Nisha said, breathless, storming back into the café. “Did anyone take the wrong umbrella?”
+  </p>
+
+  <p>
+    The waiter shrugged. “Ma’am, we serve tea. Not forensic reports.”
+  </p>
+
+  <p>
+    Arjun, meanwhile, had taken to Instagram. He posted: <strong>“Lost: one manly black umbrella. Found: floral pink one with mild perfume and aggression.”</strong>
+  </p>
+
+  <p>
+    Two hours and several mutual friends later, they connected. “You're the umbrella thief?” Nisha messaged.
+  </p>
+
+  <p>
+    “Technically, we’re both thieves,” Arjun replied. “Want to meet and un-steal?”
+  </p>
+
+  <p>
+    They met at the same café the next day — each holding the other’s umbrella like a hostage exchange.
+  </p>
+
+  <p>
+    “So this is yours,” he said, handing over the serious, professional black umbrella.
+  </p>
+
+  <p>
+    “And this... Barbie’s Monsoon Adventure... is yours,” she teased.
+  </p>
+
+  <p>
+    They laughed. Then lingered.
+  </p>
+
+  <p>
+    “Would you, uh... want to grab a chai?” he asked.
+  </p>
+
+  <p>
+    “Sure,” she smiled. “But we label our umbrellas this time.”
+  </p>
+
+  <p>
+    As the rain continued to fall outside, two umbrellas sat peacefully side by side — no confusion this time, just coincidence that turned into comedy... and maybe something more.
+  </p>
+  <button class="storyBack" onclick="goCards()">← Back</button>
+</div>
+<div id="story4"  class="container">
+  <center>
+  <h1>The Chicken Chase</h1>
+  </center>
+    <p>
+    It began with one squawk. Just one. But to Ramesh, it was war.
+  </p>
+  <center>
+<img src="chick.jpg" alt="Man chasing chicken through a village market" >
+
+  </center> 
+  <p>
+    Ramesh had bought a chicken — a plump, feathery fellow he named “Colonel.” Not because he loved chickens, but because he had promised his wife biryani. The problem? Colonel had plans of his own.
+  </p>
+
+  <p>
+    As soon as Ramesh opened the coop door, Colonel shot out like a feathery missile. Through the backyard, over the fence, and straight into the bustling village market.
+  </p>
+
+  <p>
+    “Catch that chicken!” Ramesh yelled, barefoot and breathless.
+  </p>
+
+  <p>
+    Vendors turned. A tomato cart tipped over. One old man ducked. Children screamed with laughter. And Colonel? He strutted on like a celebrity.
+  </p>
+
+  <p>
+    “This isn’t a mission, it’s a circus,” Ramesh muttered, diving between a cow and a scooter.
+  </p>
+
+  <p>
+    Meanwhile, Colonel paused to peck at spilled rice, then dashed into the cloth market. Bright dupattas flew. Aunties scolded. Someone cheered.
+  </p>
+
+  <p>
+    Ramesh finally cornered Colonel near a temple step. “Enough!” he cried.
+  </p>
+
+  <p>
+    The chicken tilted its head, blinked innocently, then jumped... right onto Ramesh’s head.
+  </p>
+
+  <p>
+    That’s when the reporter arrived. A wedding was nearby. Now, her camera had zoomed in on Ramesh wrestling a chicken like a professional wrestler tangled in feathers.
+  </p>
+
+  <p>
+    “Sir, do you always chase poultry like this?” she asked.
+  </p>
+
+  <p>
+    “No! I’m an accountant!” Ramesh cried.
+  </p>
+
+  <p>
+    The video went viral. Comments ranged from “Chicken Man of India” to “Colonel vs Colonel: Battle of the Biryani.”
+  </p>
+
+  <p>
+    In the end, Ramesh returned home — muddy, embarrassed, and empty-handed.
+  </p>
+
+  <p>
+    His wife opened the door and raised her eyebrows. “Where’s dinner?”
+  </p>
+
+  <p>
+    “Ran away,” he said. “With my dignity.”
+  </p>
+
+  <p>
+    They ordered paneer that night. And Colonel? He now lived behind the temple, worshipped by locals who believed he brought good luck... and excellent cardio.
+  </p>
+  <button class="storyBack" onclick="goCards()">← Back</button>
+</div>
+<div id="story5"  class="container">
+  <center>
+  <h1>The Umbrella Theif</h1>
+    <p>
+    Every rainy season, Mr. Sharma lost an umbrella. Not because he forgot them — no, no — but because someone stole them. Always from the same stand, outside the tea shop near City Park.
+  </p>
+  <center>
+<img src="people.jpg" alt="Confused people holding identical umbrellas at a park" >
+  </center>
+  <p>
+    “It’s a conspiracy,” he declared. “Someone has a vendetta against my umbrellas.”
+  </p>
+
+  <p>
+    Determined to catch the thief, Mr. Sharma devised a plan. He bought the ugliest umbrella known to mankind. Neon pink, polka-dotted, and with a tiny bell that jingled.
+  </p>
+  <p>
+    “No one in their right mind would steal this,” he grinned.
+  </p>
+
+  <p>
+    The next day, it rained. Perfect. He went to the tea shop, left the hideous umbrella outside, and waited inside with his chai and binoculars.
+  </p>
+
+  <p>
+    Thirty minutes in, a man in a raincoat casually approached the stand, looked left and right... and grabbed the pink monstrosity.
+  </p>
+
+  <p>
+    “Aha!” Mr. Sharma yelled, leaping outside.
+  </p>
+
+  <p>
+    The man froze. “I thought it was mine!” he stammered. “They all look the same!”
+  </p>
+
+  <p>
+    “Yours jingles?!” Sharma snapped.
+  </p>
+
+  <p>
+    The tea vendor chuckled. “Sir, this happens daily. People just grab whatever umbrella’s driest.”
+  </p>
+
+  <p>
+    That’s when Mr. Sharma got an idea. He opened a signboard beside the stand: *“Free Umbrella Exchange – No Judgement, Only Rain.”*
+  </p>
+
+  <p>
+    From then on, the umbrella chaos turned into community comedy. People left and took umbrellas freely. One guy brought a beach umbrella. A kid donated a Barbie one.
+  </p>
+
+  <p>
+    And Mr. Sharma? He finally gave up. Now he carries a raincoat... and a permanent smirk.
+  </p> 
+  <button class="storyBack" onclick="goCards()">← Back</button>
+</div>
+
+<!-- LOVE STORIES (6-10) -->
+<div id="story6"  class="container">
+  <center>
+  <h1>Wheels in  Motion</h1>
+  </center>
+  <p>The morning air was laced with dew and the scent of earth still clinging to spring. The world seemed to exhale as sunlight spilled across the countryside, turning everything golden. Trees arched over the winding path like cathedral beams, and birds chirped as if rehearsing for an unseen audience. Maya gripped her handlebars and glanced sideways at Aarav, who was riding a few feet ahead. His hair ruffled in the breeze, his back relaxed, as though he belonged to this path and the moment.</p>
+
+  <p>They hadn’t planned the ride—it just happened. A spontaneous detour on a Saturday morning, the kind where the road leads and you follow.</p>
+
+  <p>“You’re not racing me, are you?” Maya called out, squinting through the sunlight.</p>
+
+  <p>Aarav slowed down, grinning over his shoulder. “I thought you liked a little competition.”</p>
+
+  <p>She laughed and shook her head. “Only when I win.”</p>
+  <center>
+  <img src="story1.jpg"
+    alt="Couple biking through countryside">
+  </center> 
+  <p>They pedaled side by side for a while, their bikes humming in unison, wheels spinning in perfect rhythm. Silence draped between them, but it was a comfortable kind—the kind that only grows between two people who know each other deeply. They’d been dating for just over a year, and although not everything had been smooth, something about this bike ride felt like a quiet turning point. Not grand. Just... real.</p>
+
+  <p>“Want to stop at that lake we saw on the way up?” Aarav asked, pointing ahead.</p>
+
+  <p>Maya nodded, her eyes lighting up. “Yes. Let’s have that snack you promised me.”</p>
+
+  <p>He rolled his eyes. “You mean the snack you packed and I carried.”</p>
+
+  <p>“Exactly,” she said, laughing.</p>
+  <p>The trail veered off toward a clearing, and soon they arrived at a modest lake fringed by reeds and wildflowers. The water shimmered, calm and still, as if holding its breath. They laid their bikes against an old oak and found a patch of grass beneath its shade.</p>
+
+  <p>Aarav pulled out a small thermos and a container wrapped in cloth. “Okay, gourmet time.”</p>
+
+  <p>Maya leaned back on her elbows. “Peanut butter sandwiches and lemonade? You really went all out.”</p>
+
+  <p>“You’ll thank me when the sugar kicks in.”</p>
+
+  <p>They ate in slow bites, the kind that stretched time and conversation. Aarav talked about his new project at work, a marketing campaign for a small NGO. Maya shared her plans to finally start her online art shop—something she’d been hesitating on for months.</p>
+
+  <p>He looked at her with a soft pride. “You’ve been talking about that for so long. I’m glad you’re doing it.”</p>
+
+  <p>“I’m scared, though,” she admitted. “What if no one likes what I make?”</p>
+
+  <p>“They will,” he said simply. “But even if they don’t—do it anyway. For you.”</p>
+
+  <p>She turned her head toward him, surprised by the calm assurance in his voice. It wasn’t the first time he’d encouraged her, but today it felt heavier, more certain. Something about being out here—away from screens, traffic, schedules—made the words settle deeper.</p>
+
+  <p>After they ate, they lay on the grass, heads close, staring up at the canopy above.</p>
+
+  <p>“I used to ride bikes all the time as a kid,” Aarav said suddenly. “Before phones, before everything got so... fast.”</p>
+
+  <p>Maya smiled. “Me too. I’d ride till sunset and come back with skinned knees and the biggest smile.”</p>
+
+  <p>“I wonder when we stopped making time for that.”</p>
+
+  <p>She turned to look at him. “Maybe we didn’t stop. Maybe we just forgot how good it feels.”</p>
+
+  <p>A breeze passed through the trees, leaves whispering secrets they couldn’t understand.</p>
+
+  <p>They packed up their things slowly, neither eager to return just yet. As they got back on their bikes, Aarav paused, resting one foot on the pedal.</p>
+
+  <p>“You know,” he said, “sometimes I think love is a lot like biking.”</p>
+
+  <p>Maya raised an eyebrow. “Oh really? This should be good.”</p>
+
+  <p>He smirked. “No, seriously. You’re on a ride together. Sometimes you’re ahead, sometimes behind. Sometimes you fall. But you keep going. And when it works—it’s not because it’s effortless. It’s because you’re choosing to keep pedaling, even uphill.”</p>
+
+  <p>She blinked, caught off-guard by his sudden earnestness. Then she smiled, her heart tugged in the best way.</p>
+
+  <p>“I like that,” she said softly. “Let’s keep pedaling, then.”</p>
+
+  <p>They started off again, this time a little slower, not in a rush. The sun was higher now, painting their shadows long and reaching. They passed wildflowers swaying gently, and butterflies fluttered alongside them like companions.</p>
+
+  <p>At one point, Maya reached out and brushed her fingers along Aarav’s hand on the handlebar. He caught hers for just a second, a brief, warm clasp, before letting go again so they wouldn’t veer off the trail.</p>
+
+  <p>It was a small thing—but to Maya, it felt like a promise.</p>
+
+  <p>As they neared the end of the trail, civilization slowly crept back in—distant sounds of traffic, the outline of rooftops, the return of phone signals. The magic didn’t fade, exactly, but it folded itself into memory.</p>
+
+  <p>When they reached the parking lot, Maya leaned her bike against the car and turned to Aarav.</p>
+
+  <p>“Thank you,” she said.</p>
+
+  <p>“For the ride?”</p>
+
+  <p>“For today. For saying what you said. For listening.”</p>
+
+  <p>He smiled and tucked a strand of hair behind her ear. “It’s just us, Maya. Whatever road we’re on, I’m here.”</p>
+
+  <p>She leaned into him, resting her forehead against his chest. The world spun, but the wheels beneath them had taught her one thing—balance came from moving forward.</p>
+  <button class="storyBack" onclick="goCards()">← Back</button>
+</div>
+<div id="story7"  class="container">
+  <center>
+  <h1>Gravity in the Rain</h1>
+  </center>
+  <p>
+            Sometimes, love doesn’t arrive like a lightning bolt. Sometimes, it begins quietly — like two souls orbiting
+            the same space until the gravity is too strong to ignore.
+        </p>
+
+        <p>
+            Alina was a planner — meticulous, scheduled, and always prepared. She had spent the last five years working
+            in a city architecture firm, designing homes for other people while silently waiting for something to build
+            in her own life.
+        </p>
+
+        <p>
+            Arman, on the other hand, lived by spontaneity. A landscape photographer, he traveled often, never in one
+            place long enough to unpack. He loved people but loved solitude too. For him, each sunrise was a chance to
+            find beauty — and sometimes, someone — worth pausing for.
+        </p>
+
+        <p>
+            Their worlds collided on a train.
+        </p>
+
+        <p>
+            It was a rainy afternoon. Alina had missed her usual ride home after a delayed meeting. The train car was
+            nearly empty, save for a man with a camera around his neck and a seat beside him — the only one left.
+        </p>
+
+        <p>
+            “Is this taken?” she asked.
+        </p>
+
+        <p>
+            Arman looked up, smiled, and moved his backpack. “Not anymore.”
+        </p>
+
+        <p>
+            What followed was unexpected. What should have been a silent 40-minute ride turned into a conversation about
+            skies, buildings, childhood memories, and why lemon tea tastes better in the rain.
+        </p>
+
+        <p>
+            They parted without exchanging numbers. But for days, Alina couldn’t forget the way he talked about light.
+            And Arman kept replaying her laugh in his head — soft and sudden, like wind through trees.
+        </p>
+
+        <p>
+            Fate intervened the next weekend, at an art exhibit downtown. Arman was there to showcase his photographs.
+            Alina had come with a friend. She was admiring a print of a cliffside sunset when a familiar voice said
+            behind her, “That photo almost cost me my camera. The wind was ruthless.”
+        </p>
+
+        <p>
+            She turned. “And yet, totally worth it.”
+        </p>
+
+        <p>
+            Their reunion didn’t feel like a coincidence. It felt inevitable.
+        </p>
+
+        <p>
+            That evening, they walked to a café and sat under a canopy of fairy lights. It rained again, softly this
+            time. Arman showed her his photo journal. Alina showed him her sketches of dream houses she hadn’t built
+            yet. They learned each other’s silences and finished each other’s half-formed thoughts.
+        </p>
+
+        <p>
+            Weeks passed. Then months. Their love didn’t explode — it unfolded. Layer by layer. With morning messages
+            and midnight walks. With laughter during burnt dinners and quiet comfort during hard days.
+        </p>
+
+        <p>
+            Arman began planning his trips around her schedule. Alina started leaving space in her plans for surprises.
+            They grew — not into each other, but alongside each other.
+        </p>
+
+        <center>
+            <img src="luv2.jpg" alt="A field of sunflowers under soft rain">
+        </center>
+
+        <p>
+            One day, in a field of sunflowers, Arman handed her a small box. Inside was a silver compass, with an
+            engraving:
+        </p>
+
+        <p>
+            <em>“Everywhere I wander, I want to find my way back to you.”</em>
+        </p>
+
+        <p>
+            She blinked back tears, then smiled. “I was never really lost, you know. Just waiting for someone to walk
+            beside me.”
+        </p>
+
+        <p>
+            He kissed her — not like in the movies, but like someone who had found something he didn’t realize he
+            needed.
+        </p>
+
+        <p>
+            Years from that moment, they would tell their children how love didn’t arrive on time, but exactly when it
+            was supposed to.
+        </p>
+
+        <p>
+            That it wasn’t about being perfect, or even ready — but being real. That sometimes the train you almost miss
+            brings you right where you belong.
+        </p>
+  <button class="storyBack" onclick="goCards()">← Back</button>
+</div>
+<div id="story8"  class="container">
+  <center>
+  <h1>Beneath the Olive Tree</h1>
+  </center>
+  <p>
+            Sometimes, love doesn’t arrive like a lightning bolt. Sometimes, it begins quietly — like two souls orbiting
+            the same space until the gravity is too strong to ignore.
+        </p>
+
+        <p>
+            Alina was a planner — meticulous, scheduled, and always prepared. She had spent the last five years working
+            in a city architecture firm, designing homes for other people while silently waiting for something to build
+            in her own life.
+        </p>
+
+        <p>
+            Arman, on the other hand, lived by spontaneity. A landscape photographer, he traveled often, never in one
+            place long enough to unpack. He loved people but loved solitude too. For him, each sunrise was a chance to
+            find beauty — and sometimes, someone — worth pausing for.
+        </p>
+
+        <p>
+            Their worlds collided on a train.
+        </p>
+
+        <p>
+            It was a rainy afternoon. Alina had missed her usual ride home after a delayed meeting. The train car was
+            nearly empty, save for a man with a camera around his neck and a seat beside him — the only one left.
+        </p>
+
+        <p>
+            “Is this taken?” she asked.
+        </p>
+
+        <p>
+            Arman looked up, smiled, and moved his backpack. “Not anymore.”
+        </p>
+
+        <p>
+            What followed was unexpected. What should have been a silent 40-minute ride turned into a conversation about
+            skies, buildings, childhood memories, and why lemon tea tastes better in the rain.
+        </p>
+
+        <p>
+            They parted without exchanging numbers. But for days, Alina couldn’t forget the way he talked about light.
+            And Arman kept replaying her laugh in his head — soft and sudden, like wind through trees.
+        </p>
+
+        <p>
+            Fate intervened the next weekend, at an art exhibit downtown. Arman was there to showcase his photographs.
+            Alina had come with a friend. She was admiring a print of a cliffside sunset when a familiar voice said
+            behind her, “That photo almost cost me my camera. The wind was ruthless.”
+        </p>
+
+        <p>
+            She turned. “And yet, totally worth it.”
+        </p>
+
+        <center>
+            <img src="luv3.jpg" alt="two people exchange their ring"
+        </center>
+        <p>
+            Their reunion didn’t feel like a coincidence. It felt inevitable.
+        </p>
+
+        <p>
+            That evening, they walked to a café and sat under a canopy of fairy lights. It rained again, softly this
+            time. Arman showed her his photo journal. Alina showed him her sketches of dream houses she hadn’t built
+            yet. They learned each other’s silences and finished each other’s half-formed thoughts.
+        </p>
+
+        <p>
+            Weeks passed. Then months. Their love didn’t explode — it unfolded. Layer by layer. With morning messages
+            and midnight walks. With laughter during burnt dinners and quiet comfort during hard days.
+        </p>
+
+        <p>
+            Arman began planning his trips around her schedule. Alina started leaving space in her plans for surprises.
+            They grew — not into each other, but alongside each other.
+        </p>
+
+        <center>
+            <img src="luv4.jpg" alt="A field of sunflowers under soft rain">
+        </center>
+
+        <p>
+            One day, in a field of sunflowers, Arman handed her a small box. Inside was a silver compass, with an
+            engraving:
+        </p>
+
+        <p>
+            <em>“Everywhere I wander, I want to find my way back to you.”</em>
+        </p>
+
+        <p>
+            She blinked back tears, then smiled. “I was never really lost, you know. Just waiting for someone to walk
+            beside me.”
+        </p>
+
+        <p>
+            He kissed her — not like in the movies, but like someone who had found something he didn’t realize he
+            needed.
+        </p>
+
+        <p>
+            Years from that moment, they would tell their children how love didn’t arrive on time, but exactly when it
+            was supposed to.
+        </p>
+
+        <p>
+            That it wasn’t about being perfect, or even ready — but being real. That sometimes the train you almost miss
+            brings you right where you belong.
+        </p>
+  <button class="storyBack" onclick="goCards()">← Back</button>
+</div>
+<div id="story9"  class="container">
+  <center>
+     <h1>Paper Planes and Hidden</h1>
+  </center>
+    <p>Anaya and Kabir had never gotten along. Since the first semester of college, they’d been known as the classic
+            enemies. She was the quiet, focused topper. He was the loud backbencher who thought rules were suggestions.
+            The only thing they had in common? Their competitiveness.</p>
+
+        <p>They constantly clashed — in debates, presentations, and even who arrived first for class (Anaya always won).
+            But the real chaos began when their literature professor paired them for a semester-long project. Everyone
+            in class collectively gasped. Fire and gasoline, some joked.</p>
+
+        <p>“Let’s be clear,” Anaya had said on the first day. “We do this efficiently, professionally, and with as
+            little talking as possible.”</p>
+
+        <p>“Agreed,” Kabir had grinned. “Silence suits you.”</p>
+
+        <p>She had groaned. He had laughed. And the war continued.</p>
+
+        <p>But something strange began to happen during those late study sessions in the library. Kabir, usually
+            distracted, actually listened. He saw how carefully Anaya took notes, how her brow furrowed when she was
+            thinking. She, in turn, noticed he wasn’t just a goofball — he had sharp insights, especially when
+            discussing character motivations.</p>
+
+        <p>“You’re smarter than you act,” she told him once.</p>
+
+        <p>He blinked. “And you’re funnier than you let on.”</p>
+
+        <p>They paused. Then looked away. Something had shifted.</p>
+
+        <p>One evening, after class, Anaya found a paper plane on her desk. On it, a scribbled quote: "Even enemies can
+            become poetry, under the right pen."</p>
+
+        <center>
+            <img src="luv5.jpg" alt="lovers are taking in the library">
+        </center>
+        <p>No signature. But she knew the handwriting.</p>
+
+        <p>The next day, she replied with her own plane: "Then maybe we’re just a rough draft."</p>
+
+        <p>This continued for days. Hidden notes, anonymous jokes, soft confessions, all folded into paper planes.</p>
+
+        <p>When Kabir missed class for a week due to illness, Anaya found herself... worried. She texted, just once:
+            “Hope you’re okay, Kabir.” A few minutes later, he replied: “Didn’t know you cared.”</p>
+
+        <p>She typed back: “Maybe I do. A little.” And that was that.</p>
+
+        <p>The next day, a paper plane waited on her desk again. "I missed arguing with you. And your face, maybe."</p>
+
+        <p>By the time they finished the project, their classmates noticed the change. No more bickering. No more cold
+            glares. Instead, side glances, shared smiles, and notes only they understood.</p>
+
+        <p>On the last day of the semester, their presentation received the highest marks. As the class applauded, Kabir
+            leaned in and whispered, “Still think we’re enemies?”</p>
+
+        <p>She smirked. “Maybe we were just in denial.”</p>
+
+        <p>He held out his hand, palm up. Slowly, she placed hers in his. And somewhere, between rivalry and
+            revelations, a love story had unfolded — built on sarcasm, paper planes, and all the hidden words they never
+            dared to say aloud.</p>
+    <button class="storyBack" onclick="goCards()">← Back</button>
+  </div>
+<div id="story10" class="container">
+  <center>
+     <h1>Once Upon a Look</h1>
+  </center>
+    <p style="--i:1"><strong>He saw her first.</strong> In a quiet corner of the city library, buried between worn-out books and whispers of forgotten poems. Her hair was tied up in a messy knot, and she hummed while reading—a soft tune that seemed to blend with the rustle of turning pages. Her name was <strong>Saisha</strong>, and from that very moment, <strong>Arav</strong> knew she was different.</p>
+    <p style="--i:2">He didn't speak to her. Not yet. Instead, he sat in the same row every day, always a few feet away, pretending to read. But he watched her. Not in a way that was strange or invasive—but with admiration, the kind of quiet attention that artists give to a sunrise.</p>
+
+    <p style="--i:3">She never noticed. Or maybe she did. But Arav watched, day after day, as she moved, smiled, bit her pen while thinking. She loved poetry, especially Neruda, and she drank iced coffee even in winter. When she skipped a day, he’d feel the absence like a missing note in a familiar song.</p>
+
+    <p style="--i:4">His friends teased him. “Just talk to her,” said Jay, slapping his back. “What’s the worst that could happen?”</p>
+
+    <p style="--i:5">And so, one rainy evening, pushed by friendly jests and a beating heart, he walked up and asked, “Is this seat taken?”</p>
+
+    <p style="--i:6">She looked up. Her eyes held galaxies.</p>
+
+    <p style="--i:7">“It is now,” she said, smiling.</p>
+
+    <p style="--i:8">That’s how it began. He started walking her to her bus stop, carrying her books, sharing raincoats when the clouds spilled over. He learned her laugh, her fears, her favorite kind of sky. Saisha was guarded, but she let him in, slowly—like a rose that opens for just one sun.</p>
+
+    <p style="--i:9">But love, as pure and blooming as it was, is rarely simple.</p>
+
+    <p style="--i:10">Months passed, and Saisha began to feel the flutter that Arav had carried for so long. She looked forward to seeing him. She started noticing how he ran his fingers through his hair when he was nervous, how he always smelled of old books and sandalwood. She wrote poems about him, and though she never shared them, they lived in the corners of her journals.</p>
+
+    <p style="--i:11"><em>Then something shifted.</em></p>
+
+    <p style="--i:12">Arav changed. He came to the library less often. His texts became shorter, colder. When they met, his mind seemed elsewhere—like his body was with her, but his thoughts were wandering far, far away.</p>
+
+    <p style="--i:13">Saisha noticed, and it hurt. The boy who once admired her every breath now looked at her like she was a page in a book he had already read.</p>
+
+    <p style="--i:14">“Are we... okay?” she asked one night.</p>
+    <p style="--i:15">He shrugged. “I don’t know. Maybe we’re just... growing apart.”</p>
+
+    <p style="--i:16">That night, Saisha cried. But she didn’t chase him. She wasn’t a girl who begged to be loved. She stayed silent—and waited.</p>
+
+    <p style="--i:17">Weeks passed. Arav tried to distract himself. He told himself he had outgrown it, that maybe it wasn’t love—just infatuation. He focused on work, on friends, on anything that wasn’t Saisha. But every night, when the world fell silent, her smile would return. Her laughter would echo in his thoughts. He missed her terribly.</p>
+
+    <p style="--i:18">One evening, he found a poem tucked inside one of the books she once borrowed. It was hers.</p>
+
+    <p style="--i:19"><em>“I was a sky full of stars, waiting for your gaze. But you looked once, and forgot the way.”</em></p>
+
+    <p style="--i:20">And he broke.</p>
+
+    <p style="--i:21">He rushed to her street, heart pounding with guilt and hope. When she opened the door, their eyes met—and the silence was thunderous.</p>
+
+    <p style="--i:22">“I was stupid,” he said. “I thought I didn’t need you. But I’ve never felt more empty.”</p>
+
+    <p style="--i:23">She didn’t cry. She didn’t smile. She simply stepped aside and let him in.</p>
+
+    <p style="--i:24">They sat for hours, speaking little, hands finding hands. The kind of silence that heals instead of hurts.</p>
+
+    <p style="--i:25">Love is not always loud. Sometimes it is patient. Sometimes it walks away to test its truth.</p>
+
+    <p style="--i:26">They began again, this time slower. Arav had learned that admiration is easy, but commitment requires presence. And Saisha—she taught him the kind of loyalty that doesn't fade with comfort.</p>
+ <button class="storyBack" onclick="goCards()">← Back</button>
+</div>
+
+<!-- HORROR STORIES (11-15) -->
+<div id="story11" class="container">
+  <center>
+    <h1>The Whispering Well</h1>
+  </center>
+    <p>
+    The village of Dharpur was quiet, tucked away in the hills and known for two things: its orchids, and the ancient stone well behind the temple. No one used the well anymore. Children were warned to never go near it. The elders called it “the Whispering Well.”
+  </p>
+  <center>
+<img src="h1.jpg" alt="An old stone well in a foggy forest at night" >
+  </center>
+  <p>
+    “It talks when no one’s listening,” old Meera Dadi used to say, voice hushed like a prayer. “And if you listen back… it remembers you.”
+  </p>
+
+  <p>
+    Aaryan, a city boy visiting for the summer, thought it all sounded like nonsense. Ghost stories invented to keep kids obedient. He was seventeen, rational, and—most importantly—bored.
+  </p>
+
+  <p>
+    So one afternoon, with the sun setting behind the hills and the village busy with preparations for the night fair, Aaryan slipped away and made his way to the back of the temple.
+  </p>
+
+  <p>
+    There it was. Covered in moss, cracked with age, the well sat like a forgotten grave. A worn rope hung limply down into its darkness. The air around it was colder, as if the well breathed.
+  </p>
+
+  <p>
+    Aaryan leaned over the edge and called, “Hello?”
+  </p>
+
+  <p>
+    Silence.
+  </p>
+
+  <p>
+    He chuckled. “I knew it. Just a story.”
+  </p>
+
+  <p>
+    He turned to leave.
+  </p>
+
+  <p>
+    Then came a whisper.
+  </p>
+
+  <p>
+    Faint. Like wind sliding across skin. It wasn’t in any language he knew. It sounded… wet.
+  </p>
+
+  <p>
+    Aaryan froze. “Who’s there?”
+  </p>
+
+  <p>
+    The whisper returned, this time clearer. “Come... back...”
+  </p>
+
+  <p>
+    His mouth went dry. He peered into the well again. Nothing. Just blackness and a chill that bit through his shirt.
+  </p>
+
+  <p>
+    He stumbled back, heart racing. "It's just wind. Echoes. Nothing real."
+  </p>
+
+  <p>
+    But that night, he couldn’t sleep. Whispers tickled his ears in the dark. Water dripping where there was no water. Dreams of being pulled downward, fingernails scratching stone, and something cold wrapping around his ankle.
+  </p>
+
+  <p>
+    The next day, he told Meera Dadi. She grew pale and silent.
+  </p>
+
+  <p>
+    “You spoke to it?” she whispered. “You replied?”
+  </p>
+
+  <p>
+    Aaryan nodded.
+  </p>
+
+  <p>
+    “You fool,” she said, eyes glossy with fear. “It knows your voice now.”
+  </p>
+
+  <p>
+    That evening, the whispers came louder. Voices echoing through the house, even when windows were shut. Lamps flickered. Walls creaked. Aaryan locked himself in his room, but the whispers were already inside.
+  </p>
+
+  <p>
+    On the third night, he vanished.
+  </p>
+
+  <p>
+    The villagers found the front door open, the sheets on his bed soaked with well water. No footprints, no broken locks—just wet stone marks leading out the back door, toward the temple.
+  </p>
+
+  <p>
+    They searched the well. Lowered lanterns. Called his name.
+  </p>
+
+  <p>
+    Nothing answered.
+  </p>
+
+  <p>
+    Until someone leaned in close and heard a whisper: “I’m still here...”
+  </p>
+
+  <p>
+    They sealed the well with concrete that night. Placed salt and prayers all around it. But even now, villagers say, if you walk behind the temple on a windless night, you can hear Aaryan’s voice — soft, pleading, calling from below:
+  </p>
+
+  <p>
+    “Please... don’t listen.”
+  </p>
+  <button class="storyBack" onclick="goCards()">← Back</button>
+</div>
+<div id="story12" class="container">
+  <center>
+     <h1>The Room With no Door</h1>
+  </center>
+    <p>
+    There was a legend at St. Elric’s Boarding School. Deep under the east wing, past the old storage hall, there was a room with no number, no knob, and—most importantly—no door.
+  </p>
+  <center>
+  <img src="h2.jpg" alt="A dimly lit, sealed stone room with no doors or windows">
+  </center>
+  <p>
+    No one had ever seen the room from the inside. Students only whispered about it when the power flickered or the halls echoed without reason. They said people who found a way in never came back out. The teachers never spoke of it.
+  </p>
+
+  <p>
+    Until Rhea arrived.
+  </p>
+
+  <p>
+    Rhea was the kind who didn’t believe in legends. She believed in curiosity, in evidence, in proving myths wrong. So when her roommate Priya told her about the sealed room, she smirked.
+  </p>
+
+  <p>
+    “Then let’s find it,” Rhea said.
+  </p>
+
+  <p>
+    That weekend, with flashlights and a borrowed set of old blueprints from the librarian, they descended into the basement.
+  </p>
+
+  <p>
+    Dust floated like ghosts in the air. Cobwebs clung to pipes. The east wing basement had been closed off for years—decades, maybe. But the blueprints didn’t lie.
+  </p>
+
+  <p>
+    There it was. A blank wall, no cracks, just concrete. But when Rhea ran her hand across it, she felt it: a subtle draft, cold as winter breath.
+  </p>
+
+  <p>
+    “There’s something behind this,” she whispered.
+  </p>
+
+  <p>
+    Priya hesitated. “We shouldn’t.”
+  </p>
+
+  <p>
+    “I’m just looking.”
+  </p>
+
+  <p>
+    Rhea tapped on the wall. Hollow. Then she pressed harder—something gave way. A section of wall shifted back, silently, like it had been waiting for her.
+  </p>
+
+  <p>
+    Inside was darkness. Not ordinary dark, but deep, ink-like black. Rhea stepped in.
+  </p>
+
+  <p>
+    “Just five minutes,” she called back to Priya.
+  </p>
+
+  <p>
+    The wall slid shut behind her.
+  </p>
+
+  <p>
+    Priya screamed and pounded her fists against the concrete. But the wall was solid again. No seams. No cracks. No Rhea.
+  </p>
+
+  <p>
+    Security searched. The school blamed “an accident” and told everyone Rhea ran away. But Priya never believed it. And each night, when she passed the east wing, she heard something soft through the walls.
+  </p>
+
+  <p>
+    “Priya... it’s cold in here... I can’t find the way out...”
+  </p>
+
+  <p>
+    A week later, Priya was gone too.
+  </p>
+
+  <p>
+    Over the years, more students vanished. Each time, they were last seen near the east wing. Each time, the wall felt a little warmer—like it had fed.
+  </p>
+
+  <p>
+    Eventually, the east wing was sealed off. Blueprints were burned. No one was allowed near the basement.
+  </p>
+
+  <p>
+    But sometimes, late at night, janitors say they hear knocking beneath the floor. Sometimes whispers drift up from cracks in the foundation. Some say the room was never built—it appeared, hungry, drawing in the curious like a trapdoor for souls.
+  </p>
+
+  <p>
+    And somewhere in that room with no light, no air, and no escape… the missing whisper:
+  </p>
+
+  <p>
+    “Please don’t open it again.”
+  </p>
+  
+  <button class="storyBack" onclick="goCards()">← Back</button>
+</div>
+<div id="story13" class="container">
+  <center>
+    <h1>The Frogotten Train</h1>
+  </center>
+    <p>
+    It was called the Midnight Line. A route no longer found on any official schedule. Locals in the hill town of Durva whispered that a train sometimes appeared at Platform 3—long after midnight, when the station was empty, and the mist was thick enough to breathe.
+  </p>
+  <center>
+  <img src="h3.jpg" alt="An eerie, abandoned train in the misty woods">
+  </center>
+  <p>
+    Veer was a railway history blogger, always searching for urban legends. When he heard of the “Forgotten Train” while backpacking through Durva, he couldn’t resist. The townspeople warned him not to look for it. They said no one who boarded it ever returned.
+  </p>
+
+  <p>
+    But Veer, fueled by disbelief and a thirst for mystery, hid at the station one foggy night with a camera, notebook, and stubborn resolve.
+  </p>
+
+  <p>
+    At 12:47 AM, the station lights flickered. A deep rumble vibrated through the tracks. Veer stared, breath fogging in front of him, as an old steam engine rolled in—black, gleaming, with no markings or logos.
+  </p>
+
+  <p>
+    It stopped. No one disembarked. The doors hissed open slowly.
+  </p>
+
+  <p>
+    Against better judgment, Veer stepped inside.
+  </p>
+
+  <p>
+    The air was cold, like a tomb. The cabin lights flickered faintly, casting long shadows. Every seat was occupied—by people who sat perfectly still. Their eyes wide open. Silent. Unmoving.
+  </p>
+
+  <p>
+    “Excuse me?” he whispered.
+  </p>
+
+  <p>
+    No response. No blinking. No breathing.
+  </p>
+
+  <p>
+    As he moved down the aisle, he noticed the passengers all looked... faded. Dust clung to their clothes, and their skin had the dull tone of forgotten photographs.
+  </p>
+
+  <p>
+    Suddenly, the train jolted and began to move.
+  </p>
+  <p>
+    Veer panicked. He ran to the door, but it was sealed tight. The windows showed no track, only a swirling fog outside. His phone had no signal. His watch stopped ticking.
+  </p>
+
+  <p>
+    A voice came from behind: “You shouldn’t be here.”
+  </p>
+
+  <p>
+    He turned. One of the passengers had moved—an old woman with hollow eyes and a mouth that barely opened.
+  </p>
+
+  <p>
+    “We boarded for our regrets. And now we ride forever.”
+  </p>
+
+  <p>
+    “What does that mean?” he stammered.
+  </p>
+
+  <p>
+    She tilted her head. “Why are you here, Veer? What’s the one thing you never forgave yourself for?”
+  </p>
+
+  <p>
+    His breath caught. He remembered his brother—left behind in the mountains during a storm. He’d never gone back. Never forgiven himself.
+  </p>
+
+  <p>
+    “This train finds those whose guilt outweighs time,” the woman whispered. “And keeps them. Until they remember who they were.”
+  </p>
+
+  <p>
+    He backed away, shouting, “Let me off!”
+  </p>
+
+  <p>
+    But the train just sped through the mist. Endless. Directionless. Outside, shadows flickered by—moments of the past, memories he tried to forget.
+  </p>
+
+  <p>
+    The last thing he saw before the lights went out... was himself in a reflection, older than he was. Worn. Forgotten.
+  </p>
+
+  <p>
+    The Midnight Line has never been officially documented. But sometimes, on cold foggy nights in Durva, locals say they still hear the whistle of a train that no longer exists.
+  </p>
+
+  <p>
+    And if you listen closely, you might hear a voice from within shouting:
+  </p>
+
+  <p>
+    “Help me! I don’t belong here!”
+  </p>
+    <button class="storyBack" onclick="goCards()">← Back</button>
+  </div>
+<div id="story14" class="container">
+  <center>
+      <h1>The Reflection That Smiled</h1>
+  <p>
+    Mira hated mirrors. Ever since she was a child, she swore they looked back a little too long. Her parents dismissed it as imagination, but she never shook the feeling that her reflection was just... wrong.
+  </p>
+  <center>
+  <img src="h4.jpg" alt="A mirror with a shadowy smiling reflection">
+  </center>
+  <p>
+    Years later, living alone in a rented flat, Mira covered all her mirrors. All except one — the ornate antique in the bathroom that the landlord refused to remove. "It’s built into the wall," he’d said. "Original 1920s glass. A piece of history."
+  </p>
+
+  <p>
+    Mira avoided it. She learned to brush her teeth without looking up, to shower with her eyes averted. But one night, after a stressful shift, she glanced up — just for a second.
+  </p>
+
+  <p>
+    Her reflection smiled.
+  </p>
+
+  <p>
+    Not a twitch. Not a delayed mimic. It smiled while her face remained frozen in exhaustion.
+  </p>
+
+  <p>
+    She screamed and stumbled back, heart racing. But when she looked again, the reflection was normal. Perfectly mirrored.
+  </p>
+
+  <p>
+    “Lack of sleep,” she muttered, trying to laugh it off. But she didn’t sleep that night.
+  </p>
+
+  <p>
+    Over the next week, it got worse. Sometimes, the reflection winked. Other times, it whispered — though she couldn’t hear through the glass. Once, she saw it crying blood.
+  </p>
+
+  <p>
+    She called the landlord. He laughed. “That mirror’s been there a hundred years, and you’re the first to complain it’s haunted.”
+  </p>
+
+  <p>
+    “I didn’t say haunted.”
+  </p>
+
+  <p>
+    “Well, what else would you call it?” he chuckled, then hung up.
+  </p>
+
+  <p>
+    That night, Mira dreamed of the mirror. She stood in front of it, and her reflection stepped out of the frame — grinning. It whispered, “Your life looks better on me.”
+  </p>
+
+  <p>
+    She woke up screaming, drenched in sweat.
+  </p>
+
+  <p>
+    The next day, she covered the mirror with a sheet, nailing it down. But in the morning, the sheet was crumpled on the floor.
+  </p>
+
+  <p>
+    Her reflection winked again.
+  </p>
+
+  <p>
+    Terrified, Mira took a hammer and smashed the glass. It cracked — but didn’t break. Instead, her reflection screamed. Not her. The glass shimmered with pain, then went still.
+  </p>
+
+  <p>
+    That night, she locked the bathroom door and slept on the couch.
+  </p>
+
+  <p>
+    In the early hours, she woke to a sound — soft footsteps. And then a whisper:
+  </p>
+
+  <p>
+    “You broke my face. So I took yours.”
+  </p>
+
+  <p>
+    Mira ran to the bathroom, trembling. The door was ajar. The mirror had no cracks. Her reflection was inside — smiling wider than ever.
+  </p>
+
+  <p>
+    And outside the mirror, standing in her place, was something else. Something that looked like her. But it wasn’t. It blinked first.
+  </p>
+
+  <p>
+    Now, people say Mira is... different. She talks more, smiles constantly, and never seems tired anymore. But her neighbors swear something about her feels off. Like her eyes don't blink at the right time.
+  </p>
+
+  <p>
+    And when she walks by a window, her reflection still stands there — watching. Waiting.
+  </p>
+<button class="storyBack" onclick="goCards()">← Back</button>
+</div>
+<div id="story15" class="container">
+  <center>
+    <h1>The Latern on the Lake</h1>
+  </center>
+  <p>
+    Every year on October 13th, the people of Valebrook gathered at the edge of Lake Elira, holding glowing lanterns. They whispered prayers, lowered their lights onto the water, and watched them drift silently into the mist.
+  </p>
+  <center>
+  <img src="h5.jpg" alt="A glowing lantern floating on a misty lake at night">
+  </center>
+  <p>
+    No one talked about what the ritual meant — only that it kept the lake calm and the village safe. It had always been that way. Always.
+  </p>
+
+  <p>
+    Elena had grown up hearing rumors: children who drowned mysteriously, old fishermen pulled under by unseen hands, voices calling out from the reeds. But the adults only said, "Mind the lake, child. Be respectful, or it’ll remember your name."
+  </p>
+
+  <p>
+    When her brother Theo disappeared two years ago — during the very night of the lantern ritual — Elena stopped believing in silence.
+  </p>
+
+  <p>
+    “Why did we let him near the water?” she asked, over and over. No one answered. Some looked away. Others said it was fate.
+  </p>
+
+  <p>
+    On the third October 13th without Theo, Elena returned home. The fog over Lake Elira was especially thick, curling like fingers on the surface.
+  </p>
+
+  <p>
+    This time, she brought no lantern.
+  </p>
+
+  <p>
+    As the village lined the shore, Elena stood apart. She didn’t light a candle. She watched the others set theirs afloat, their eyes downcast, lips moving silently.
+  </p>
+
+  <p>
+    Then, breaking the hush, she stepped into the lake.
+  </p>
+
+  <p>
+    Gasps rose from the crowd, but no one moved. No one dared enter the water. Elena walked knee-deep, then waist-deep. The lake was still. Too still.
+  </p>
+
+  <p>
+    “Bring him back,” she said into the fog. “You’ve taken enough.”
+  </p>
+
+  <p>
+    A sound echoed — like a breath, or a whisper through trees.
+  </p>
+
+  <p>
+    One of the lanterns reversed direction. It floated back, glowing brighter than before.
+  </p>
+
+  <p>
+    Inside its flickering flame, Elena saw something — a silhouette. A face. Theo’s.
+  </p>
+
+  <p>
+    Her heart pounded. “Theo?” she called.
+  </p>
+
+  <p>
+    The lantern stopped before her, the reflection of his face still glowing. He opened his mouth, but no words came out. Just bubbles. And tears — or perhaps lake water — streamed down the glass.
+  </p>
+
+  <p>
+    “He doesn’t belong here anymore,” came a voice. Not Theo’s. Not human.
+  </p>
+
+  <p>
+    Elena turned. A woman stood behind her, pale and soaked, eyes like bottomless pools. She held a shattered lantern in her hands, its wick cold and rotting.
+  </p>
+
+  <p>
+    “They all come to me when forgotten,” the woman whispered. “You remembered. That is your mistake.”
+  </p>
+
+  <p>
+    The lanterns around the lake flared violently — then extinguished. Screams rose from the crowd, now lost in the darkness.
+  </p>
+
+  <p>
+    Elena tried to run, but her legs wouldn’t move. The lake had thickened. It clung to her like mud, dragging her down inch by inch.
+  </p>
+
+  <p>
+    “He’s mine now,” the woman hissed. “And soon… so will you be.”
+  </p>
+
+  <p>
+    The last thing Elena saw was Theo’s reflection — not pleading, not crying — but smiling.
+  </p>
+
+  <p>
+    Every year since, on October 13th, the lake grows quieter. Fewer lanterns are lit. And on still nights, villagers swear they see two figures standing just beneath the water’s surface — side by side, holding lanterns that never dim.
+  </p>
+  <button class="storyBack" onclick="goCards()">← Back</button>
+  </div>
+
+<!-- FANTASY STORIES (16-20) -->
+<div id="story16" class="container">
+  <center>
+    <h1>The Monsoon Key</h1>
+  </center>
+    <p>At the edge of the forgotten Mistwood Forest, where stars seemed to whisper and trees bent toward secrets, lived
+        a girl named Elira. Her cottage was small, nestled among lavender bushes and mossy stones, but her dreams were
+        vast. Unlike the villagers who feared the forest’s shifting shadows, Elira felt the woods calling to her—as if
+        they remembered her name.</p>
+
+    <p>Her grandmother, once a traveler of strange lands, had told her stories of enchanted glades and doors that opened
+        only for the brave. “The forest hides more than wolves and thorns,” she said with knowing eyes. “It hides
+        forgotten magic.”</p>
+
+    <p>One night, under a sky with no moon, Elira awoke to a strange glow on her windowsill. A feather—silver, luminous,
+        and warm to the touch—rested there. The moment her fingers brushed it, a whisper entered her thoughts:</p>
+
+    <p class="magic">“Find the door that drinks the moon.”</p>
+
+    <p>With nothing but the feather, a lantern, and her grandmother’s old compass, Elira stepped into the forest. The
+        path behind her vanished almost instantly, replaced by twisted vines and curling mist. But Elira did not
+        hesitate. The silver feather pulsed faintly in her hand, guiding her steps.</p>
+    <center>
+        <img src="f1.jpg" alt="elira is infront of key door">
+    </center>
+    <p>She walked for what felt like hours, until the trees thinned into a hidden glade bathed in ghostly light. In the
+        center stood a tall stone arch, freestanding and ancient. Vines wrapped its surface like veins, and the air
+        shimmered around it. Yet it had no door—just a smooth, empty space within its frame.</p>
+
+    <p>As Elira stepped closer, the moon broke free of the clouds above and spilled its light across the glade. The
+        moment moonlight touched the arch, symbols flared across its surface—glowing runes that pulsed like a heartbeat.
+        A tiny keyhole appeared, glimmering just above the arch’s center.</p>
+
+    <p>The feather in her hand began to glow brighter. Before her eyes, it transformed into a delicate silver key, cool
+        and humming with quiet power.</p>
+
+    <p>Elira fit the key into the lock. The arch began to hum, and then—without warning—a portal of rippling light
+        exploded into the empty space. The air was filled with the scent of stars and wind from places unknown.</p>
+
+    <p>Without fear, Elira stepped through.</p>
+
+    <center>
+        <img src="f1.1.jpg" alt="elira turn with power">
+    </center>
+
+    <p>She emerged in a realm beyond imagining. The sky was twilight, lit by three crescent moons. Floating islands
+        drifted gently through the air, connected by glowing bridges. Trees with crystal leaves whispered to one
+        another, and rivers ran with silver light.</p>
+
+    <p>A creature with feathers like stardust and eyes like lanterns appeared. “You hold the Moonlight Key,” it said in
+        a melodic voice. “Few are chosen.”</p>
+
+    <p>“Why me?” Elira asked, awe washing over her.</p>
+
+    <p>“Because your heart is not bound by fear,” the creature replied. “This realm, Lunareth, was sealed long ago to
+        protect its magic. Only those pure of intent and brave of spirit may enter. But you must choose—will you explore
+        or return?”</p>
+
+    <p>Elira looked at the endless sky, the paths that twisted toward floating cities and glowing forests. “I will
+        stay,” she whispered. “I want to know the secrets.”</p>
+
+    <p>The creature nodded and spread its wings. “Then follow me.”</p>
+
+
+    <p>Elira spent days—or was it years?—learning from the people of Lunareth. She met wind-singers who controlled
+        breezes with their flutes, and moon-weavers who spun dreams into cloth. She was taught the language of stars and
+        how to listen to the earth’s memory.</p>
+
+    <p>But not all was peaceful. Beneath Lunareth’s beauty lay a shadow sealed long ago—an ancient sorceress named
+        Virela, once guardian of the Moonlight Key, who had fallen to jealousy and tried to steal its power. She had
+        been locked in the Rift Tower beyond the Skybridge, but the seals were weakening.</p>
+
+    <p>One night, the stars trembled. The council of seers summoned Elira. “The key you brought has awakened her,” they
+        said. “But it is also the only way to reseal her prison.”</p>
+    <center>
+        <img src="f1.2.jpg" alt="elira standing in the tree wall"
+    </center>
+
+
+    <p>Elira, now no longer the unsure girl who entered the forest, accepted her task. Armed with the knowledge she had
+        gained, and the silver key reborn as a staff of light, she crossed the Skybridge to the Rift Tower.</p>
+
+    <p>Inside, Virela waited—eyes burning like eclipses, voice cold as starlight. “You are but a child,” she sneered.
+        “This realm should be mine.”</p>
+
+    <p>“Lunareth belongs to none,” Elira replied. “It belongs to those who protect wonder, not possess it.”</p>
+
+    <p>The battle that followed shook the sky. Elira channeled the power of the key, not to destroy, but to restore. In
+        the final moment, she offered Virela a choice: redemption or eternal sleep.</p>
+
+    <p>Moved by Elira’s compassion, Virela wept for the first time in a thousand years. She laid down her crown, and the
+        Rift Tower sealed once more—not with chains, but with forgiveness.</p>
+
+
+    <p>Elira became a guardian of Lunareth, her name sung across islands and dreamlands. She built a hall where other
+        wanderers might enter through moonlit doors, should they be brave, and pure, and curious enough to find them.
+    </p>
+
+    <p>Back in Mistwood, villagers sometimes spoke of glowing glades and vanishing girls, but no one ever found the path
+        again. Except for one child, years later, who found a silver feather resting quietly on their windowsill.</p>
+
+    <p class="magic">The moon remembers. The forest whispers. And the door still waits.</p>
+  <button class="storyBack" onclick="goCards()">← Back</button>
+</div>
+<div id="story17" class="container">
+  <center>
+     <h1>The Ember Tree</h1>
+  </center>
+    <p>In the land of Rivenreach, where clouds crawled low over mountains and rivers whispered to those who listened,
+        there was a legend of a tree that burned but never turned to ash. It was called the Ember Tree—a source of
+        ancient fire magic—and only revealed itself once every hundred years, on the coldest night of the century.</p>
+
+    <p>Kael was a blacksmith’s son in the village of Dornhold. He spent his days forging horseshoes and sharpening
+        ploughs, but his nights were filled with stories from his grandfather, who once claimed to have seen the Ember
+        Tree's glow across the valley ridge. Most people dismissed the tale as the ramblings of an old man, but Kael
+        never forgot.</p>
+
+    <p>When the air turned sharper than a blade and frost blanketed even the hearthstones, Kael knew the night had come.
+        He wrapped himself in a wool cloak, took his grandfather’s iron lantern, and followed the river’s frozen path
+        into the wilderness.</p>
+
+    <p>For hours, he trudged through snowdrifts and bone-chilling winds, guided only by a distant pulse of orange light
+        flickering beyond the hills. Eventually, the forest opened into a clearing. There it stood—the Ember Tree.</p>
+    <center>
+        <img src="f2.jpg" alt="forest home">
+    </center>
+    <p>Its bark shimmered like molten rock, and its leaves flickered with tiny flames that danced but gave no smoke. The
+        ground around it was warm, and snow refused to settle nearby. Kael stepped closer, heart pounding. The stories
+        were true.</p>
+
+    <p>As he reached out, a voice echoed from behind the flames.</p>
+
+    <p class="magic">"Why do you seek the Ember’s gift?"</p>
+
+    <p>A figure emerged, cloaked in ember-colored robes, eyes glowing like coals. It was the Guardian of the Tree, a
+        spirit older than the mountains.</p>
+
+    <p>"Not for power," Kael said. "I want to forge more than iron. I want to craft something that lasts—something that
+        heals." He thought of his village, worn and cold, his mother’s fading warmth, and the sick who could not be
+        helped by firewood and prayer alone.</p>
+
+    <p>The Guardian stared at him for a long moment. “Many come for glory. Few come for others.”</p>
+
+    <p>The flames of the tree brightened. One burning leaf drifted downward, landing in Kael’s palm. It didn’t burn him.
+        Instead, it melted into his skin, marking his hand with a faint glowing sigil.</p>
+
+    <p class="magic">"This is embercraft,"</p> the Guardian said. <span class="magic">"The art of shaping with fire from
+        the heart. But beware—every gift bears a cost."</span></p>
+
+    <center>
+        <img src="f2.1.jpg" alt="hand with fire">
+    </center>
+
+    <p>Kael returned to Dornhold before sunrise. The villagers barely recognized him—his eyes held the glow of coals,
+        and warmth followed him like a second shadow.</p>
+
+    <p>He built a new forge by the riverbank, and strange things began to happen. Blades he shaped never dulled.
+        Lanterns he made burned with soft orange fire for weeks without oil. Most remarkably, he forged a small sunstone
+        pendant for his ailing mother—and within days, her strength returned.</p>
+
+    <p>Word of Kael’s embercraft spread. People traveled from distant towns to ask for his tools, his healing trinkets,
+        and his warmth. But Kael remembered the Guardian’s words and only accepted those with honest hearts.</p>
+
+    <p>Years passed, and Kael grew wise in his craft. But one winter, a band of noblemen from the capital arrived,
+        demanding he forge weapons—flaming blades and armor that burned enemies on sight.</p>
+
+    <p>"I do not craft for war," Kael said.</p>
+
+    <p>"You’ll craft what we pay for," the leader snarled, "or we’ll take your fire and your forge."</p>
+
+    <p>That night, as Kael sat beside the embers of his forge, the mark on his hand pulsed with warning. He knew what he
+        had to do. He took the leaf-shaped sigil and pressed it into his anvil. The flames in the forge roared higher
+        than ever before, and every ember in the village flickered in unison.</p>
+
+    <p>The soldiers returned the next morning—only to find the forge cold and the anvil shattered. Kael was gone,
+        vanished like smoke on the wind.</p>
+
+    <center>
+        <img src="f2.3.jpg" alt="four people surround with fire">
+    </center>
+
+    <p>Some say he returned to the Ember Tree and became its next Guardian. Others whisper he walks the world, crafting
+        fire-born gifts for those in need. But in Dornhold, the river forge remains untouched, and every winter, the
+        villagers light a lantern outside their doors in Kael’s memory.</p>
+
+    <p>And once every century, when the frost bites deepest, children are told to listen closely to the hills. If
+        they’re lucky, they might just hear a forge spark to life… and the first crackle of an ember leaf falling from
+        the sky.</p>
+
+    <p class="magic">The tree still burns. The fire still listens.</p>
+  <button class="storyBack" onclick="goCards()">← Back</button>
+</div>
+<div id="story18" class="container">
+  <center>
+    <h1>The Clockmaker’s Orchard</h1>
+  </center>
+    <p>In the quiet village of Windmere, nestled between hills that rolled like old songs, lived an elderly clockmaker
+        named Elias Thorne. He made no ordinary clocks—his timepieces whispered, shimmered, and ticked with silver cogs
+        that turned with magic. Yet none were as curious as the garden behind his cottage, where a strange orchard grew.
+    </p>
+
+    <p>The orchard bore no fruit. Instead, from its branches hung clocks. Some ticked loudly, some barely at all. Locals
+        often joked that Elias was trying to grow time itself.</p>
+
+    <p>Only Elias knew the truth: each clock grew from the seed of a soul he had helped save.</p>
+    
+    <center>
+        <img src="f3.jpg" alt="old man seeing garden">
+    </center>
+    <p>Years ago, when the world was colder, Elias found a dying bird beneath the snow. In a desperate act, he crafted a
+        clock with a heartbeat gear and placed it inside the bird. The bird lived—and with it, a small tree sprouted in
+        the garden, bearing a single ticking fruit.</p>
+
+    <p>He realized then: time could be gifted. But never without a cost.</p>
+
+    <p>One rainy evening, a girl named Mira arrived at Elias’s door. Her little brother lay sick with a fading pulse,
+        and no healer could save him. She had heard tales of the orchard and begged Elias to give her brother more time.
+    </p>
+
+    <p>“Time is not free,” Elias said gently. “It must be borrowed from somewhere else.”</p>
+
+    <p>“Take it from me,” Mira whispered. “I’ll give him my years.”</p>
+
+    <p>Touched by her courage, Elias led her into the orchard. Beneath a golden tree, he placed a hand over her chest. A
+        faint glow pulsed into the roots, and a tiny clock sprouted instantly—one with two hands, turning in opposite
+        directions.</p>
+
+    <p>The boy awoke the next day, laughing as though he had never been ill. But Mira, though still youthful in body,
+        walked a little slower. She began to dream of ticking leaves and moments slipping through her fingers.</p>
+
+    <p>Years passed. The orchard grew. And each time someone came with love, Elias helped them. But always, the orchard
+        claimed something in return—time that could not be reclaimed, and fates quietly rewritten.</p>
+
+        <center>
+            <img src="f3.2.jpg" alt="old man discussing with little girl">
+        </center>
+    <p>Then one winter, Elias felt the slowing of his own heart. The clocks in his orchard began ticking in harmony—an
+        omen, he knew. His time was almost up.</p>
+
+    <p>But the villagers, grateful for the years he’d gifted others, came together and stood in the snow, holding
+        candles and whispering stories of what Elias had saved: daughters, fathers, even dreams. And one by one, they
+        stepped into the orchard and touched the bark of the trees, offering slivers of their own time—not much, just a
+        moment each.</p>
+
+    <p>The orchard shimmered gold. A great tree grew in the center. And for the first time, Elias wept—not because he
+        was saved, but because time had chosen to love him back.</p>
+    <center>
+        <img src="f3.3.jpg" alt="old man is listening music ">
+    </center>
+    <p class="magic">And somewhere deep in the orchard, a clock chimed thirteen—a sound that had never been heard
+        before.</p>
+
+    <p>Some say Elias still walks among the trees, tending to the ticking fruit, offering time to those with courage in
+        their hearts and stories in their souls. Others say the orchard vanished when he passed, appearing only to those
+        willing to trade something precious for something sacred.</p>
+
+    <p class="magic">Not all clocks mark the hours. Some measure love.</p>
+  <button class="storyBack" onclick="goCards()">← Back</button>
+</div>
+<div id="story19" class="container">
+  <center>
+    <h1>The The Moonstone Prophecy</h1>
+  </center>
+    <p>In the forgotten land of Elaria, where the trees whispered secrets and the rivers glowed silver at night, a great darkness stirred beneath the mountains.</p>
+
+<center>
+    <img src="f3.3.jpg" alt="old man with girl">
+</center>
+  <p>For centuries, Elaria had been protected by the Moonstone, a radiant crystal said to have fallen from the sky. Its light kept the ancient evil known as the Dreadmist imprisoned deep beneath the earth. But now, the Moonstone’s light was fading — and so was hope.</p>
+
+  <p>In a quiet village nestled in the Valley of Winds, a seventeen-year-old girl named Liora lived a quiet life with her grandfather, a once-great mage who had long retired. Liora was no hero. She was a dreamer — always scribbling dragons and castles in her journal, longing for adventure in a world that had none left to offer.</p>
+
+  <p>Until the night the stars fell.</p>
+
+  <p>It started with a rumble in the sky. Then a beam of blue light shot up from the mountains. Trees shivered. Animals scattered. And in the center of the village square, a silver owl with glowing eyes landed, carrying a scroll sealed with the symbol of the Moon Temple — a place thought lost to myth.</p>
+
+  <p><em>The scroll read:</em></p>
+
+  <p><strong>“The Moonstone has cracked. The Dreadmist stirs. A Seer has spoken. Only the Child of Wind and Flame can restore the light.”</strong></p>
+
+  <p>Grandfather read it twice, then looked at Liora with troubled eyes.</p>
+
+  <p>“It’s you,” he whispered. “You were born during the twin eclipse. The signs… they match.”</p>
+
+  <p>Liora blinked. “Me? I can barely climb a hill without tripping.”</p>
+
+  <p>But before doubt could root itself too deeply, a second light blazed — this one dark and furious — from the mountains. The sky turned purple. Lightning struck the ancient trees. The Dreadmist had awoken.</p>
+
+  <p>There was no time to prepare. Grandfather handed her a silver pendant — the Wind Sigil — and pointed east.</p>
+
+  <p>“You must go to the Moon Temple. The path is hidden but the pendant will guide you. Take the owl. Trust no one.”</p>
+
+  <p>Liora hugged him tightly, packed her journal and a flask of water, and followed the owl into the forest.</p>
+
+  <h2>Chapter Two: The Thornwood Trials</h2>
+
+  <p>The journey through the Thornwood Forest was a nightmare of twisted vines and whispering shadows. The owl flew ahead, leading her through paths that moved on their own. One night, the trees tried to trap her dreams, showing visions of fear and failure.</p>
+
+  <p>But Liora pressed on. She remembered her grandfather’s words: <em>“The child of Wind must never stop moving. When the flame flickers, the wind must carry it.”</em></p>
+
+  <p>After days of walking, she reached the foot of the Mirror Cliffs, where her own reflection stepped out of the river and challenged her.</p>
+
+  <p>“Are you truly the one to save Elaria?” the reflection asked. “You’ve never fought a battle. Never wielded a sword.”</p>
+
+  <p>“I have courage,” Liora said. “And that will be enough.”</p>
+
+  <p>The reflection smiled and vanished.</p>
+
+  <p>At the top of the cliffs stood a stone gate etched with runes. The pendant glowed, and the runes shifted. The gate opened.</p>
+
+  <h2>Chapter Three: The Temple of the Moon</h2>
+
+  <p>The Moon Temple was not ruined, as legends claimed. It was alive — floating above a pool of liquid starlight, suspended by unseen forces. In its center stood the cracked Moonstone, dim but still pulsing.</p>
+
+  <p>Guarding it was a woman made of glass and flame — the Warden of Light.</p>
+
+  <p>“You have come, Child of Wind and Flame,” she said. “But to heal the Moonstone, you must face the Dreadmist.”</p>
+
+  <p>Liora felt a shiver of fear. “How? I have no magic.”</p>
+
+  <p>“But you have truth. And fire. The magic lies within.”</p>
+
+  <p>The Warden placed a glowing shard into her pendant. “This is the last sliver of pure moonlight. Use it when the shadows grow strongest.”</p>
+
+  <p>Suddenly, a roar shook the temple. A storm of black fog burst through the walls — the Dreadmist, massive and alive, with faces swirling in its form, screaming and whispering at once.</p>
+
+  <p>“You cannot stop me,” it hissed. “You are a child. I am forever.”</p>
+
+  <p>Liora stood her ground. The owl circled her head, wings spread wide.</p>
+
+  <p>“Maybe I am a child,” she shouted. “But even children can stand in the face of darkness.”</p>
+
+  <p>The Moon Pendant pulsed. Liora raised it high. The shard blazed like a sun. Light surged from the pendant, striking the Dreadmist. It howled, recoiled, but surged again.</p>
+
+  <p>“I need more,” Liora gasped.</p>
+
+  <p>Suddenly, memories flooded her — her grandfather’s laughter, the warmth of her village, the dreams she drew in her journal. Each one a spark. Each one a flame.</p>
+
+  <p>She poured them into the pendant.</p>
+
+  <p>The light turned golden.</p>
+
+  <p>With a cry of courage, she stepped forward and touched the Moonstone.</p>
+
+  <p>The cracks sealed.</p>
+
+  <p>The light exploded.</p>
+
+  <h2>Chapter Four: The Dawn of Elaria</h2>
+
+  <p>When Liora opened her eyes, the Dreadmist was gone. The temple was still. The owl perched beside her, now silent and calm.</p>
+
+  <p>The Moonstone floated above her, whole and gleaming. She was changed. The pendant no longer glowed — it had become part of her.</p>
+
+  <p>The Warden bowed. “You have restored balance. Elaria will remember your name.”</p>
+
+  <p>Liora returned to her village a week later. Her grandfather wept with joy.</p>
+
+  <p>The villagers gathered to hear her story. Children begged to see her pendant. The stars once again twinkled in the sky.</p>
+
+  <p>Liora became the youngest guardian of the Moon Temple in history. But more importantly, she learned that courage isn’t about strength — it’s about choosing to move forward even when you’re afraid.</p>
+
+  <p>And from that day on, whenever a child in Elaria dreamed of adventure, they’d look to the sky and remember the girl who followed a glowing owl — and saved the world.</p>
+ <button class="storyBack" onclick="goCards()">← Back</button>
+  </div>
+<div id="story20" class="container">
+  <center>
+    <h1>The Mirror of Many Faces</h1>
+  </center>
+    <p>In the bustling city of <strong>Velora</strong>, where holograms danced on skyscrapers and the streets buzzed with drones, people were more connected than ever—but more alone than they realized.</p>
+<center>
+    <img src="WhatsApp Image 2025-07-07 at 12.37.02.jpeg" alt="">
+</center>
+    <p>At the edge of the city lived <strong>Aira</strong>, a teenager with a curious mind and a quiet soul. While others were obsessed with followers, filters, and fame, Aira collected old things: books, Polaroids, typewriters. Her small room was a museum of forgotten times.</p>
+
+    <p>Her classmates called her “Analog Girl.” She didn’t mind.</p>
+
+    <p>One stormy evening, while exploring a flea market hidden beneath an overpass, Aira found an old mirror, framed with vines and metal gears, half-buried under a pile of broken tech. It looked ancient, but shimmered with an inner light.</p>
+
+    <p>A small brass plate read:</p>
+    <em>“The Mirror of Many Faces – See yourself as the world sees you.”</em>
+
+    <p>Intrigued, Aira bought it for five credits and lugged it home.</p>
+
+    <p>That night, when she looked into the mirror, she didn’t see herself.</p>
+
+    <p>She saw <strong>ten versions</strong> of herself, all doing different things: dancing on a stage, crying in an office, laughing with friends, wandering in a storm, and one with glowing eyes and wings made of light.</p>
+
+    <p>The reflections moved. Then, the winged version spoke:</p>
+    <em>“We are who you might become, Aira. Every path. Every click. Every post. Every dream. The Mirror shows them all.”</em>
+
+    <p>Aira stumbled back. “Is this... some kind of trick?”</p>
+
+    <em>“No. This is your magic.”</em>
+
+    <p>Each day, she saw new versions: a social media addict, a wild forest-girl, a warrior. The mirror didn’t predict the future—it reflected her present impact.</p>
+
+    <p>One day, her joyful self vanished. The shadow-self explained:</p>
+    <em>“You haven’t been kind to her. You compare. You criticize. So she’s fading.”</em>
+
+    <p>Aira realized she had ignored her own joy trying to fit into a world of performance and filters.</p>
+
+    <p>She changed. She drew again. Wrote. Wore what she loved. Reached out in real ways.</p>
+
+    <p>The mirror glowed brighter. Her joyful self returned.</p>
+
+    <p>Then one night, the mirror cracked slightly. She panicked.</p>
+
+    <p>But all the versions in the mirror said:</p>
+    <em>“You’re ready. You no longer need us to tell you who you are.”</em>
+
+    <p>The mirror showed only one reflection: herself—smiling, whole.</p>
+    
+    <button class="storyBack" onclick="goCards()">← Back</button>
+  </div>
+
+<!-- EMOTIONAL STORIES (21-25) -->
+<div id="story21" class="container">
+   <center>
+    <h1>Where the Light Once Lived</h1>
+  </center>
+    <p>Not the empty chair. Not the untouched mug of jasmine tea. Not even the sunbeam that filtered through the lace curtain onto the now-dusty piano keys. Just the silence. The kind that presses in and fills every room, making the air thick, like grief has weight.</p>
+
+  <p>Ella hadn’t touched Samuel’s things since he passed. His coat still hung by the door, his glasses lay folded on the nightstand, and his worn-out slippers waited patiently beside the bed. She told herself it was because she wanted to feel close to him, but the truth was simpler—she wasn’t ready to let him go.</p>
+
+  <div class="quote">“It’s not the dying that hurts the most. It’s the remembering.”</div>
+
+  <p>They had been married for forty-three years. Forty-three seasons of coffee in the morning, crossword puzzles, holding hands at the farmer’s market. They had arguments, of course—Samuel was stubborn and Ella was proud—but in the end, it was love that always circled back around.</p>
+
+  <p>The cancer came quietly, like a thief. One day he was tending to his roses; the next, he couldn’t get out of bed. Ella tried to smile, to stay strong. She fed him soup with shaking hands, read him their favorite poems, and kissed his forehead every night like a vow. But love, sometimes, is not enough to keep someone here.</p>
+
+  <p>Now, every room in their house felt like a memory. The kitchen echoed with laughter that was no longer there. The garden bloomed like it didn’t know he was gone. Even the mailbox held its breath when she passed.</p>
+
+  <p>One rainy Tuesday, Ella found herself in the attic. She wasn’t sure why. Maybe she was chasing the ghost of a happier time. Maybe she was just tired of pretending.</p>
+
+  <p>There, beneath a dusty sheet, she found the old wooden trunk. She remembered it from their first apartment—the one they could barely afford, with leaky pipes and creaky floors. Inside were relics of a life shared: postcards from Venice, a chipped seashell from their honeymoon, Polaroids of laughter frozen in time.</p>
+
+  <p>But it was the letter that broke her.</p>
+
+  <center>
+    <img src="e1.jpg" alt="ella is broken">
+  </center>
+
+  <p>Yellowed at the edges, addressed in Samuel’s neat handwriting, and sealed with the same wax he used when proposing. She opened it with trembling fingers.</p>
+
+  <p><em>My Dearest Ella,</em></p>
+
+  <p><em>If you're reading this, I suppose I am no longer beside you in this world, though you must know I never truly left. I’m in the breath of the wind through our curtains, in the rustle of the leaves outside the window, in the space beside you where my hand once rested.</em></p>
+
+  <p><em>You were my greatest gift, Ella. My home. My peace. You made life a symphony, even on the days when it was just static. I know you’ll miss me. I hope you do, because I’ll miss you too. But don’t let grief become your only companion.</em></p>
+  
+  <center>
+    <img src="e1.2.jpg" alt="ella and samuel got tears at hospital">
+  </center>
+  <p><em>Live. Please. Wear that red scarf you love. Take walks even when the sky is grey. Laugh loudly. Forgive easily. And one day, when the weight feels lighter, plant a rose bush for me. Yellow. You know they were my favorite.</em></p>
+
+  <p><em>I love you. Always will.</em></p>
+
+  <p><em>— Samuel</em></p>
+
+  <p>Ella pressed the letter to her chest and wept. Not the quiet sobs of someone trying to stay strong, but the ragged, soul-cracking cry of someone letting go—just enough to survive.</p>
+
+  <div class="quote">“Grief is love’s echo. Let it ring.”</div>
+ 
+  <p>That spring, a yellow rose bush bloomed in their garden. The neighbors said it was the most vibrant they'd ever seen. Ella smiled as she tended to it every morning, humming the tune Samuel used to play on the piano. The silence wasn’t gone, but it was gentler now. Softer. Like a whisper instead of a wound.</p>
+
+  <p>Some days were hard. Some nights she still reached for his hand. But she wore the red scarf. She laughed with her grandchildren. She learned to make jasmine tea the way he liked it, and drank it slowly, watching the sun rise like he used to.</p>
+
+  <p>Love, she realized, never truly ends. It just changes form. From hand-holding to memory. From shared mornings to blooming roses. From presence to light.</p>
+
+  <p>And wherever Samuel was now, she hoped he saw her smile.</p>
+  
+  <button class="storyBack" onclick="goCards()">← Back</button>
+</div>
+<div id="story22" class="container">
+  <center>
+    <h1>The Last Cup of Tea</h1>
+  </center>
+    <p>Every evening at 5:00 PM, Mira set two cups on the table.</p>
+
+  <p>One for herself.  
+  One for her son, Aarav.</p>
+
+  <p>Even though it had been four years since he left.</p>
+
+  <p>The room hadn't changed. His sketchbooks still lay on the shelf. The wall clock he’d fixed still ticked softly in the corner. She still brewed his favorite tea—strong, with two spoons of sugar and just a splash of milk.</p>
+
+  <p>He was only 19. One moment, vibrant and full of dreams. The next, a phone call, a crash, a silence that would stretch on for the rest of her life.</p>
+
+  <center>
+    <img src="e2.jpg" alt="a girl with tea cup">
+  </center>
+  <p>For months, Mira couldn’t breathe without breaking.</p>
+
+  <p>People told her to “move on.” But how do you move on from your own heart?</p>
+
+  <p>One rainy afternoon, while dusting his desk, she found a folded piece of paper tucked inside his journal. It was addressed: <strong>“For Ma.”</strong></p>
+
+  <div class="quote">
+    “If anything ever happens, please know:<br>
+    You were the best part of my life.<br>
+    Thank you for your laughter, your sacrifices, your stubborn love.<br>
+    Don’t stop painting. Don’t stop drinking tea at 5.<br>
+    Live for both of us.”
+  </div>
+
+  <p>Mira sat down, tears streaming, hands trembling. She poured his cup. Then hers. For the first time in years, she drank slowly—really tasted it. Let it warm the places inside her that had gone cold.</p>
+
+  <p>She still sets two cups every evening. But now, when she sips, she smiles. She paints again, too—soft watercolor scenes of skies and stars, because he loved the sky.</p>
+
+  <p>Grief never leaves, but it softens.</p>
+
+  <p>And somewhere in the quiet, between each heartbeat and sip of tea, she feels him there—smiling back.</p>
+  
+  <button class="storyBack" onclick="goCards()">← Back</button>
+</div>
+<div id="story23" class="container">
+  <center>
+    <h1>The Sky Without You</h1>
+  </center>
+    <p>The day Leah died, the sky was a shade of blue so cruelly bright that it made Ava want to scream.</p>
+
+  <p>People say time stops when someone dies. That’s not true. The world kept turning. The birds kept singing. People laughed on the street. But for Ava, everything went silent. Like someone had pressed mute on the entire universe, and the only sound she could hear was the echo of her own heartbreak.</p>
+
+  <p>Leah was her older sister. Her only sister. Her best friend. Her protector. Her mirror. They did everything together—midnight snacks, shared secrets, whispered fears in the dark. And now, all of that was gone. Erased by a drunk driver on a rainy afternoon.</p>
+
+  <p>The funeral was a blur. White flowers, cold hands, too many hugs. People told Ava to be strong. She smiled and nodded, but something inside her broke that day. And it never really healed.</p>
+
+  <p>In the weeks after, Ava stopped going outside. She ignored messages. She stared at walls. She hated everything—music, sunshine, her own reflection. Most of all, she hated the world. How dare it keep spinning? How dare people keep breathing when Leah couldn’t?</p>
+
+  <p>Her parents grieved differently. Her mother cried quietly in the kitchen. Her father drank too much and stopped speaking altogether. They didn’t look at Ava the same anymore. Sometimes, she wondered if they saw Leah in her face—and if it hurt them to see it.</p>
+
+  <p>She didn’t want to go to school. She didn’t care about grades or friends or the future. What future? Every morning felt like waking up inside a nightmare that wouldn’t end. She would lie on her bed and stare at the ceiling, whispering, <em>“Why not me?”</em></p>
+
+  <div class="quote">“Some days, living felt like betrayal. As if breathing was stealing air she no longer deserved.”</div>
+
+  <p>People stopped trying after a while. The messages stopped. The visits stopped. Even grief has an expiration date in other people’s minds. But Ava’s didn’t expire. It just changed shape—sharp and angry at first, then dull and cold like stone.</p>
+
+  <p>One night, unable to sleep, Ava opened Leah’s old journal. It smelled like her—vanilla lotion and ink. Most pages were full of drawings, scribbles, song lyrics. But one entry stopped her cold:</p>
+   
+  <center>
+    <img src="e3.jpg" alt="ava is siting in the alone room">
+  </center>
+  <div class="quote">
+    “If I ever die young, I want Ava to know she saved me more times than I can count. She’s the only reason I believe in anything. I hope she never stops laughing. I hope she never lets the world break her.”  
+    — Leah
+  </div>
+
+  <p>Ava didn’t cry. She couldn’t. But something shifted. A thread of warmth in the middle of the cold. Not enough to melt the ice, but enough to notice it was there.</p>
+
+  <p>She got up the next morning. Brushed her hair. Ate something. Just once. Just to see if she could.</p>
+
+  <p>Living didn’t become easier overnight. She still hated the world. Still hated that Leah was gone. But now, she also remembered the way Leah laughed when she burned toast. The way she sang off-key in the car. The way she believed Ava was magic, even when Ava didn’t believe it herself.</p>
+
+  <p>One afternoon, she went outside. The sun made her squint, and she almost turned back. But then a breeze hit her face, and for a second, she imagined it was Leah’s hand, brushing her cheek the way she used to.</p>
+
+  <p>She sat in the park, sketchbook on her lap. She couldn’t draw like Leah, but she didn’t care. She scribbled a bird, then a tree. Then a girl with her face turned to the sky.</p>
+
+  <p>Some days were still dark. Some nights were unbearable. But Ava began to write letters to Leah in her journal. She started watching sunsets again. She still didn’t forgive the world—but she stopped punishing herself for surviving it.</p>
+
+  <p>One year after the accident, she stood under that same cruel blue sky. This time, she didn’t scream. She closed her eyes and whispered, “I miss you,” and let the wind carry it wherever it needed to go.</p>
+
+  <p>She was still angry. Still broken in places. But she was alive. And for now, that was enough.</p>
+
+  <div class="quote">
+    “Grief didn’t leave her. But it learned to walk beside her. Quiet. Heavy. But not alone.”  
+  </div>
+
+  <p>Ava would never be the same girl she was before Leah died. But she was still here. She still had a heartbeat. And maybe, someday, she’d find a reason to laugh again.</p>
+
+  <p>Not because the world deserved it.  
+   But because Leah would have wanted her to.</p>
+  
+  <button class="storyBack" onclick="goCards()">← Back</button>
+</div>
+<div id="story24" class="container">
+   <center>
+    <h1>When the Light Flickered</h1>
+  </center>
+  <center>
+   <img src="e4.jpg" alt="A dimly lit room with a flickering bulb and an old woman sitting alone">
+  </center>
+  <p>
+    Every evening at 7:03 PM, the bulb in Meera’s living room flickered—just once. A single, uncertain pulse of light that made her glance up from her knitting. And every evening, she whispered, “You’re still here, aren’t you?”
+  </p>
+
+  <p>
+    It had started on the night Aarav died.
+  </p>
+
+  <p>
+    Her husband of 48 years had passed quietly in his sleep during a December rainstorm. The house had felt unusually still that morning, like even the walls were grieving. But that evening, as Meera sat with her cup of tea, staring blankly at his empty chair, the light above had flickered.
+  </p>
+
+  <p>
+    Just once.
+  </p>
+
+  <p>
+    She assumed it was faulty wiring, a bulb nearing its end. But when it happened again the next day—and again, always at 7:03—her breath caught. That had been the exact time Aarav made his last joke before bed: “If I die tonight, at least let it be with socks on. Cold feet in the afterlife sounds dreadful.”
+  </p>
+
+  <p>
+    Meera had chuckled at the time, unaware it would be the last sound they shared.
+  </p>
+
+  <p>
+    For weeks, she told no one about the flicker. The electrician came and found nothing wrong. Replaced the bulb. Checked the switch. “Perfectly fine, Ma’am,” he said with a shrug. But the flickering continued, always at the same time.
+  </p>
+
+  <p>
+    “I’m not crazy,” she whispered into the quiet.
+  </p>
+
+  <p>
+    At first, it haunted her. The thought that Aarav’s spirit might be stuck, trapped in this world because of her grief. She lit candles, muttered prayers, and tried to let go. But nothing changed.
+  </p>
+
+  <p>
+    Over time, the flicker became something else. Not a haunting. A heartbeat.
+  </p>
+
+  <p>
+    She began to talk to it—tell it about her day, the neighbors’ drama, the recipes she messed up. And though there was no voice in reply, the flicker would come, steady and soft. Like an old man smiling from the other room.
+  </p>
+
+  <p>
+    One stormy night, the lights across the neighborhood went out. Meera sat in the darkness, clutching her shawl. She didn’t cry, but her lips trembled. It was exactly 7:03 PM.
+  </p>
+
+  <p>
+    And then—miraculously—the bulb above flickered. Once. Just once.
+  </p>
+
+  <p>
+    In a house of blackout, one light listened.
+  </p>
+
+  <p>
+    Years passed. The world outside changed. Children who once played outside her gate grew into adults with busy lives. The tea kettle aged with her. But every night, without fail, Meera looked up at 7:03 and smiled.
+  </p>
+
+  <p>
+    When her granddaughter, Tara, moved in for college, she noticed the routine. “Why do you look at the ceiling at the same time every night, Nani?”
+  </p>
+
+  <p>
+    Meera only smiled. “Just waiting for someone to say goodnight.”
+  </p>
+
+  <p>
+    Tara laughed. “You’re adorable. Old-fashioned and a little weird. But adorable.”
+  </p>
+
+  <p>
+    The day Meera passed, Tara was home. The house was quiet, filled with the hum of memories. The doctors said it had been peaceful.
+  </p>
+
+  <p>
+    That evening, as Tara sat alone in the living room, hugging Meera’s shawl, the bulb above flickered.
+  </p>
+
+  <p>
+    Just once.
+  </p>
+
+  <p>
+    Her eyes welled up. “Hi, Nani,” she whispered.
+  </p>
+
+  <p>
+    Somewhere between science and soul, a connection endured. And every evening at 7:03, the light flickered—no longer a mystery, but a message.
+  </p>
+  
+  <button class="storyBack" onclick="goCards()">← Back</button>
+</div>
+<div id="story25" class="container">
+  <center>
+    <h1>Bench by the Lake</h1>
+</center>
+<center>
+  <img src="e5.jpg" alt="A wooden bench facing a calm, serene lake during autumn">
+</center>
+  <p>
+    Every Sunday, just as the morning mist began to lift off the lake, an old man named Raghav would take his seat on the weathered wooden bench by the water. It was his ritual — one that began decades ago and never changed, even after everything else in his life did.
+  </p>
+
+  <p>
+    The bench wasn’t particularly special to anyone else. Just an old seat overlooking the lake, half-shaded by an oak tree. But to Raghav, it was sacred ground. It was the place where he met her.
+  </p>
+
+  <p>
+    Her name was Asha. She had been sitting on that same bench reading poetry the first time he saw her, some fifty years ago. A red scarf tucked into her collar, hair pinned up messily, and a smile that caught the sun.
+  </p>
+
+  <p>
+    He didn’t know how long he stood there watching, before she looked up and said, “There’s room, you know.” That was all it took. He sat down. They talked. And kept talking. For hours. For years.
+  </p>
+
+  <p>
+    The lake bore witness to everything — their courtship, their wedding, the time she told him she was pregnant, and the countless Sunday mornings where they simply sat side by side in silence, watching the ripples in the water.
+  </p>
+
+  <p>
+    And then, time did what it always does. Asha grew weaker. Slower. The bench visits became less frequent. One day, she didn’t come at all.
+  </p>
+
+  <p>
+    Raghav still did.
+  </p>
+
+  <p>
+    He brought her favorite book of poems. Read it aloud like she used to. Sometimes he brought flowers. Sometimes just memories. The lake remained still, listening, as if it remembered too.
+  </p>
+
+  <p>
+    “You wouldn’t believe how quiet everything is now,” he’d murmur. “Even the birds miss your voice.”
+  </p>
+
+  <p>
+    People began to notice him — the old man with the kind eyes and quiet smile, always on the bench, always alone. Some nodded respectfully. A few tried to make conversation. He welcomed kindness, but never stayed long. He was there for someone else.
+  </p>
+
+  <p>
+    One spring morning, a little girl ran past the bench and dropped her stuffed rabbit. Raghav bent slowly, picked it up, and handed it back with a gentle smile. Her mother thanked him.
+  </p>
+  <p>
+    “You’re always here,” she said.
+  </p>
+
+  <p>
+    “Yes,” he replied. “I promised her I would be.”
+  </p>
+
+  <p>
+    The woman nodded, somehow understanding what he meant, and left him with a quiet glance of respect.
+  </p>
+
+  <p>
+    One rainy Sunday, Raghav didn’t come. Nor the next. Locals who walked the path wondered. Then, a small plaque appeared beside the bench:
+  </p>
+
+  <blockquote>
+    In memory of Raghav & Asha — who taught us that love can linger longer than a lifetime.
+  </blockquote>
+
+  <p>
+    Now, every Sunday, someone new finds that bench. Some bring books. Some flowers. Others just sit and breathe. But all of them feel it — a warmth in the air, a whisper in the rustling leaves.
+  </p>
+
+  <p>
+    Love still lives there, on the bench by the lake.
+  </p>
+  <button class="storyBack" onclick="goCards()">← Back</button>
+</div>
+
+<!-- THRILLER STORIES (26-30) -->
+<div id="story26" class="container">
+  <center>
+        <h1>The Silent Chase</h1>
+</centre>
+        <p>Detective Riya had always trusted her instincts. That night, her gut screamed something was wrong.</p>
+<center >
+      <img src="t1.jpg" alt="officer is shocked while reading msg in her phone">
+  </center >
+        <p>Rain hammered the windshield as she parked outside the abandoned warehouse on the edge of Mumbai's docks. Her
+            partner, Arjun, wasn’t answering his phone. His last message was a pin drop to this location with just two
+            words: “Found him.”</p>
+
+        <p>The place reeked of rust and secrets. Riya moved cautiously, her flashlight slicing through the darkness.
+            Every creak of the floorboards made her pulse spike. This wasn’t just another drug bust. Something else was
+            at play.</p>
+
+        <p>She heard it — a faint dragging sound from the upper floor. She climbed the staircase, gun drawn. The room
+            above was empty, except for blood. A smear across the floor led to a trapdoor in the back.</p>
+
+        <p>Below was a hidden basement. Cold. Silent. Riya descended and found Arjun — unconscious, tied to a chair, a
+            deep gash on his temple.</p>
+
+        <p>Before she could reach him, the door slammed shut. Darkness swallowed her. Then — a whisper. “You should’ve
+            stayed away, detective.”</p>
+
+        <p>A single bulb flickered on, revealing a man in a black coat and surgical gloves. Riya recognized him
+            instantly. Dr. Ishaan Verma — once a respected psychiatrist, now a fugitive after being accused of
+            manipulating his patients into committing crimes for him. They called him “The Puppeteer.”</p>
+
+        <p>“Why Arjun?” Riya growled.</p>
+
+        <p>Ishaan smiled. “Bait. You’re the real challenge.”</p>
+
+        <p>He pressed a button. Gas hissed into the room. Riya shot the valve and fire erupted — chaos. She freed Arjun
+            and pulled him out as the building blazed behind them. But Ishaan had vanished.</p>
+
+        <p>Days passed. The media buzzed about the Puppeteer’s return. Riya’s every move was shadowed. She barely slept,
+            haunted by Ishaan’s grin.</p>
+
+        <p>Then, a letter arrived at her desk — no stamp, no address, just her name. Inside: a photo of her younger
+            brother, Aarav, with today’s date and time scrawled in red. She hadn’t seen Aarav in years — he was in rehab
+            abroad.</p>
+
+        <p>Panic gripped her. She rushed to her apartment — it was torn apart. Her laptop was open, camera on. A voice
+            spoke: “Detective Riya, let’s play a game. Save him, or lose everything.”</p>
+
+        <p>The screen switched to a live feed. Aarav was chained in a dimly lit room. A timer blinked: 01:00:00.</p>
+
+        <p>The game began.</p>
+
+        <p>Clues led her across the city — an old orphanage, an abandoned subway station, a hospital wing closed for
+            years. Each location brought twisted riddles and haunting memories of victims she couldn’t save.</p>
+
+        <p>Time slipped away. With ten minutes left, she reached a deserted theatre. The stage was lit. Aarav was there
+            — still alive. But so was Ishaan.</p>
+
+        <p>He clapped. “Brilliant performance, detective. But here’s your final act: Choose. Save your brother… or
+            arrest me. You can’t do both.”</p>
+
+        <p>Ishaan revealed a switch in his hand. “This will flood the chamber he’s in. Or… put down your gun, and I’ll
+            surrender. Your call.”</p>
+
+        <p>Riya’s hands trembled. For once, instinct failed her. But her training didn’t. In a flash, she shot the
+            lights, lunged forward, tackled Ishaan, and smashed the switch from his grip. Backup stormed in — Arjun had
+            tracked her phone.</p>
+
+        <p>Aarav was safe. Ishaan was arrested — laughing as he was dragged away. “You may have won tonight,” he
+            whispered. “But the show never ends.”</p>
+
+        <p>That night, Riya didn’t sleep. The city was quiet, but her mind wasn’t. Somewhere, someone else was watching.
+            Planning. The Puppeteer had pulled his strings — but for how long could she cut them?</p>
+  
+  <button class="storyBack" onclick="goCards()">← Back</button>
+</div>
+<div id="story27" class="container">
+   <center>
+  <h1>Shadows of the Last Signal</h1>
+</center>
+  <p>Rain pounded the windows of the remote signal station nestled deep in the Himalayan range. Officer Meera Jain had just completed her night rounds when the last signal came through — a faint, broken distress code from a military drone patrolling the border. It wasn’t meant for her station, yet it flickered through the ancient communication console like a ghost.</p>
+
+  <p>Curious and unsettled, Meera traced the signal’s origin. The coordinates pointed to Black Hollow — a restricted forest zone long abandoned due to unexplained disappearances. Though protocol demanded she report and wait, something in the broken transmission — a whisper of her brother’s voice, missing for years — pushed her to act.</p>
+
+  <p>She packed essentials and hiked through the soaked trails before dawn. By midday, she stood at the edge of Black Hollow. No birds chirped. No wind rustled. Just silence.</p>
+
+  <p>Inside the forest, strange symbols marked the trees. Her compass spun uselessly. But the signal pulsed stronger on her handheld tracker. As she ventured deeper, Meera encountered remnants of a military outpost — equipment rusted, tents torn, and claw marks everywhere. Yet no blood. No bodies.</p>
+
+  <p>Nightfall descended quickly. Her tracker screamed a location half a mile north. She found a buried hatch, long sealed. After forcing it open, she descended into darkness lit only by her headlamp. Inside was a maze of tunnels — once clearly a lab — now in decay.</p>
+
+  <p>She found a journal. The final entry read:</p>
+
+  <p class="highlight">"The experiment went too far. We’ve opened something not meant to be known. The transmissions won’t stop. They mimic voices — loved ones — but they are not real."</p>
+<center>
+      <img src="t2.jpg" alt="officer start's operation">
+</center>
+  <p>Suddenly, Meera heard it. Her brother’s voice, clear and close. “Meera... help me.”</p>
+
+  <p>She ran through the corridor until she reached a sealed chamber. A figure sat strapped to a chair, head low. “Arjun?” she whispered.</p>
+
+  <p>The figure looked up — his face was Arjun’s, but eyes empty, mouth twitching as it repeated, <span class="highlight">“Help me... Help me...”</span> like a recording.</p>
+
+  <p>Before she could react, the lights flickered. The door behind her slammed shut. The air grew cold, and whispers filled the chamber.</p>
+
+  <p>Meera grabbed her flare gun and fired. The room burst into red light. The illusion shattered — the figure was a husk. Not human. Not her brother.</p>
+
+  <p>She sprinted back, chased by shadowy forms. At the exit hatch, she activated the emergency beacon. A helicopter responded. As she was airlifted out, the forest behind her seemed to fold into itself, like a curtain drawn on a stage.</p>
+
+  <p>Back at base, the signal console crackled.</p>
+
+  <p><span class="highlight">“Meera...”</span> said a voice.</p>
+
+  <p>It was Arjun’s.</p>
+
+  <p>But she had destroyed the lab. Or had she?</p>
+
+  <p>The transmission ended with coordinates.</p>
+
+  <p>A new location.</p>
+
+  <p>A new game.</p>
+  <button class="storyBack" onclick="goCards()">← Back</button>
+</div>
+<div id="story28" class="container">
+   <center>
+  <h1>The Last Transmission</h1>
+ </centre>
+<p>The emergency beacon pulsed red against the steel walls of Deepwater Station Echo. Lieutenant Mara Quinn stared at it, unblinking, heart thumping beneath her pressure suit. They had just lost contact with the surface command — and now, they were alone, two miles beneath the Atlantic.</p>
+
+  <p>“Echo Control, this is Quinn. Do you read?” she repeated into her headset. Static replied. And then—something else. A low hum, almost like a whisper. She froze. The hum wasn’t mechanical. It had…rhythm.</p>
+
+  <p>Quinn turned to Dr. Elwin Ross, the station’s chief scientist. He was pale, beads of sweat on his brow despite the chilled air. “What did you hear?” she asked.</p>
+
+  <p>“It’s the same sound we detected last night,” he said, barely above a whisper. “From the trench.”</p>
+
+  <p>Yesterday, their sonar picked up an irregular pulse from the Mariana-like trench nearby. They had chalked it up to tectonic shifts. But now, something was answering. And the station’s systems were failing one by one.</p>
+
+  <p>“We need to seal off Sector B,” Ross said suddenly. “The power flickers started there.”</p>
+
+  <p>Quinn hesitated. Sector B contained the observation dome — their only full visual access to the trench. But she nodded. “Seal it. Now.”</p>
+
+  <p>As Ross tapped the command into the console, the lights dimmed again. The hum grew louder. Quinn’s earpiece crackled, then a voice — her own voice — whispered: “Help me.”</p>
+
+  <p>Her blood turned cold. “Ross… did you hear that?”</p>
+
+  <p>He stared at her. “Hear what?”</p>
+
+  <p>“It was my voice. In my headset. Saying ‘Help me.’”</p>
+
+  <p>Ross slowly backed away. “There’s something in the comm system.”</p>
+
+  <p>They moved to the central control hub. The system logs showed unauthorized signal traffic — a series of encoded bursts not of human origin. Quinn examined the timestamps. They had begun before their descent.</p>
+
+  <p>“What the hell is this?” she muttered.</p>
+
+  <p>“Not natural,” Ross whispered. “And not ours.”</p>
+
+  <p>Then the station shook — not a quake, but something deliberate. A force. Pipes screamed. The lights failed completely for a heartbeat. Then, emergency lights kicked in, painting the halls in red.</p>
+<center>
+     <img src="t3.jpg" alt="investigated sucess">
+</center>
+  <p>Sector B's blast doors hissed. But they hadn't sealed. Quinn saw on the monitor: the doors were jammed. And from the observation dome camera, something moved. A long, dark figure swam into view, gliding silently just beyond the glass — far larger than any known marine life.</p>
+
+  <p>“It’s watching us,” Ross said hoarsely.</p>
+
+  <p>“That’s impossible,” Quinn replied. “It’s two miles down.”</p>
+
+  <p>“So are we.”</p>
+
+  <p>The figure moved closer to the dome. And then, the glass cracked — just slightly. A hairline fracture. But that was all it needed. Alarms screamed.</p>
+
+  <p>“We need to get to the escape pod!” Quinn shouted. They ran, the corridor lights strobing as if the station itself were under siege.</p>
+
+  <p>Behind them, the whisper returned. Not through the headset — now through the very metal of the walls. Words from every direction. “We see you.” “You came too deep.” “Join us.”</p>
+
+  <p>Quinn grabbed Ross by the arm. “Keep moving!”</p>
+
+  <p>They reached the pod bay. It was dark. Silent. Only one pod remained, partially fueled. Quinn initiated startup. A progress bar began climbing slowly, agonizingly.</p>
+
+  <p>“I’ll hold them off,” Ross said, picking up a flare gun from the emergency kit.</p>
+
+  <p>Quinn shook her head. “We leave together.”</p>
+
+  <p>“There’s no time.” Ross looked her dead in the eyes. “If they breach the pod bay, neither of us make it.”</p>
+
+  <p>The whispering became a roar, a cacophony of voices no human mouth could produce. Quinn stepped into the pod, heart tearing in two. Ross backed away, flare gun ready. The last thing she saw before the hatch closed was Ross raising it toward the corridor as something dark approached.</p>
+
+  <p>The pod launched, shuddering as it rose through black water. As it ascended, the station’s lights faded from view. Silence enveloped her — but not peace.</p>
+
+  <p>She reached the surface six hours later, rescued by a patrol boat. But she said nothing of what she saw. The station was declared lost. Ross was never found.</p>
+
+  <p>Weeks passed. Then, one night, Quinn's personal radio — stored, unused — lit up.</p>
+
+  <p>A familiar voice whispered through the static: “Help me.”</p>
+
+  <p>Her own voice.</p>
+
+  <p>Then silence.</p>
+  
+  <button class="storyBack" onclick="goCards()">← Back</button>
+</div>
+<div id="story29" class="container">
+   <center>
+    <h1>Echoes in Apartment 4B</h1>
+</center>
+    <p>Jenna moved into Apartment 4B to escape the noise of the city. The ad said "quiet, top floor, great view." What
+        it didn't mention were the sounds after midnight.</p>
+
+    <p>At first, she thought it was the pipes — groaning, clanking. Then she noticed the timing. Every night, exactly
+        12:17 a.m., a whisper slid through the vents. Just a few words.</p>
+<center>
+     <img src="t4.jpg"the girl is shocked after the hearing the news">
+</center>
+    <p><em>"Let me out."</em></p>
+
+    <p>She told the landlord, Mr. Kelvin, but he just gave her a strange look and said, “That unit’s been empty for
+        years before you came. Don’t let your mind play tricks.”</p>
+
+    <p>Jenna began recording the sounds. She played one for her friend Mark, who was a sound engineer. He scrubbed
+        through the file and looked disturbed. “That’s not feedback. That’s a human voice, Jen. And it’s layered — like
+        someone’s whispering from inside the wall.”</p>
+
+    <p>That night, Jenna stayed up. She placed her phone by the vent, camera rolling. At 12:17, the whisper came. This
+        time, followed by a thump. Then another. From inside the wall.</p>
+
+    <p>Heart pounding, she followed the sound to the hall. The wallpaper was torn near the baseboard. She pulled at it,
+        revealing a seam — a sealed door.</p>
+
+    <p>Against all reason, she pried it open. Behind it, stairs. Old, wooden, descending into darkness. The air turned
+        cold. She stepped down, phone light barely piercing the gloom.</p>
+
+    <p>Below, a small room. A chair, chains, and a mirror. But not her reflection — someone else’s. A woman, pale,
+        wide-eyed, mouthing the words: <em>"Let me out."</em></p>
+
+    <p>Jenna screamed and stumbled back up. The door slammed shut behind her. She tried to open it — locked tight. She
+        never told anyone what she saw. But every night at 12:17, she still hears the whisper.</p>
+
+    <p><em>And now… it knows her name.</em></p>
+  
+  
+  <button class="storyBack" onclick="goCards()">← Back</button>
+</div>
+<div id="story30" class="container">
+  <center>
+    <h1>The Shadow That Waits</h1>
+</center>
+    <p>The wind howled through the narrow lanes of <span class="highlight">Patalkot</span>, a forgotten village buried deep within the Satpura hills. Most maps didn’t show it anymore — and the locals preferred it that way. Silence wasn’t just peace here. It was survival.</p>
+
+    <p>For three nights, three people had died. No wounds. No signs of struggle. Just bodies frozen in fear, eyes wide, lips cracked open in silent screams. And on every door — the same <span class="highlight">burnt handprint</span>, blackened into the wood like a curse from fire itself.</p>
+
+    <p>The villagers whispered one name in fear: <strong>“Champa.”</strong></p>
+<center>
+     <img src="t5.jpg" alt="ghost">
+</center>
+    <p>She had been a tribal woman — burned alive in 1995, accused of witchcraft. They said she would return in 30 years. That time had come.</p>
+
+    <p><span class="highlight">Inspector Raghav Iyer</span> didn’t believe in ghosts. But when he arrived in Patalkot, even he felt it — a presence watching. Waiting.</p>
+
+    <p>The priest <span class="highlight">Tantya Baba</span> told him: “You will hear your name three times. Then it will be too late.”</p>
+
+    <p>That night, Raghav heard it. <em>“Raghav…”</em> Then again. And a third time. A burnt handprint appeared on his door. He realized the truth — he was <span class="highlight">Champa’s son</span>, saved from the fire as a child.</p>
+
+    <p>He returned the locket she once wore to the temple ruins. Her spirit rose — not to kill, but to cry. She vanished with dawn. The curse, it seemed, was lifted.</p>
+
+    <h2>But Shadows Linger...</h2>
+
+    <p>Six months later, another village. Another death. Another handprint. This was no longer a haunting. It was a pattern.</p>
+
+    <p>In <span class="highlight">Ambikapur</span>, children had vanished. A little girl said: “A lady comes at night. She waits at the well.”</p>
+
+    <p>Raghav climbed into the well. There, he found a child’s locket. The rope snapped. Darkness swallowed him.</p>
+
+    <p>Whispers filled the void. Pale children appeared around him. “She wasn’t alone,” one said. “The one who waits above… she called them.”</p>
+
+    <p>A woman in white leaned over the well — face veiled, hand burning with fire. This was no spirit. This was a summoner. A puppeteer. The true source of the curse.</p>
+
+    <h2>She Waits Still...</h2>
+
+    <p>Raghav escaped the well. But he knew now — <span class="highlight">Champa</span> was only the beginning. Something darker was still free.</p>
+
+    <p>As he sat in his jeep, the rear window fogged. A finger traced a message into the glass:</p>
+
+    <p></p>“SHE WALKS AMONG YOU.”</p>
+
+    <p>And in the mirror, for a split second — her veiled eyes opened.</p>
+  <button class="storyBack" onclick="goCards()">← Back</button>
+</div>
+
+<!-- ADVENTURE STORIES (31-35) -->
+<div id="story31" class="container">
+  <center >
+   <h1>The Crystal Caverns of Zalor</h1>
+</center >
+  <p>
+    Deep beneath the desert sands of Zalor, legends spoke of glowing crystal caverns—veins of light that pulsed with life and whispered ancient secrets. Most thought them myths, buried in time. But adventurer and geologist Mira Alvaréz believed otherwise.
+  </p>
+
+  <p>
+    Armed with a solar-powered drill, mapping drones, and a determination forged by a decade of failures, Mira ventured alone into the blazing dunes. She wasn’t chasing treasure. She sought knowledge—proof that the planet itself could breathe and remember.
+  </p>
+<center>
+   <img src="a1.jpg"
+       alt="Mystical glowing crystal cave">
+</center>
+  <p>
+    After three days of scanning, her drone picked up strange seismic patterns—echoes of rhythm, not random quakes. Following the vibrations, Mira located a narrow fissure. With harness and rope, she descended into shadow, her helmet light dancing across ancient sediment.
+  </p>
+
+  <p>
+    Then she saw it. The cavern opened like a jaw, lined with towering crystals—blue, violet, and gold—each humming a faint note. The walls themselves pulsed with bioluminescent veins, as if the cave was alive. Her instruments went haywire. Compass spun. Signals glitched. But Mira pressed deeper.
+  </p>
+
+  <p>
+    At the center stood a massive crystal obelisk. Unlike the rest, it shimmered with a mirrored surface, reflecting not just her image, but memories—fragments of the Earth’s past. She saw erupting volcanoes, primordial seas, early civilizations. It was as if the obelisk remembered everything.
+  </p>
+
+  <p>
+    Entranced, Mira reached out. The moment her fingers brushed the surface, a surge of energy flowed through her. She collapsed, unconscious.
+  </p>
+
+  <p>
+    Hours later, she awoke outside the fissure. The cave had sealed shut, as if it had never opened. Her cameras and tools were fried. But burned into her memory was a final vision from the obelisk—of the Earth transforming, healing itself, and the role she was meant to play.
+  </p>
+
+  <p>
+    Mira returned to the surface changed. She never found the cavern again, though she tried for years. But she spoke of what she saw, inspiring a new generation to listen to the planet—not just study it.
+  </p>
+
+  <p><strong>Thus the legend of the Crystal Caverns of Zalor lived on—not as myth, but as memory.</strong></p>
+  <button class="storyBack" onclick="goCards()">← Back</button>
+</div>
+<div id="story32" class="container">
+   <center >
+  <h1> The Skybound Compass</h1>
+</center >
+  <p>
+    In a world where cities floated above the clouds, seventeen-year-old Leena had only one dream: to become a sky explorer like her late father. He was the captain of the legendary airship Nimbus Hawk, lost in a storm a decade ago while chasing a myth — the Skybound Compass, a device said to lead to hidden realms.
+  </p>
+<center >
+     <img src="a2.jpg" 
+       alt="Skybound Compass Adventure" >
+       
+</center>
+  <p>
+    Raised by engineers in the drifting city of Solara, Leena spent her days fixing gears and studying star charts. Her chance came when a broken crate arrived at the dock, containing fragments of an old brass device and a torn journal page with her father’s handwriting. It mentioned coordinates and one word: “Awaken.”
+  </p>
+
+  <p>
+    That night, under starlight, Leena pieced together the device. As she clicked the final gear into place, the compass whirred to life, its needle spinning wildly before settling — not on north, but up, toward the highest cloud belts.
+  </p>
+
+  <p>
+    Borrowing a retired air skiff, Leena took off before dawn, alone but determined. The compass pulsed in her hand, its glow intensifying as she rose. Storms raged above the cloud line, but she pushed on, dodging bolts of lightning and weaving through air currents. The compass led her beyond known airspace, into the wild sky.
+  </p>
+
+  <p>
+    On the second day, her skiff’s fuel gauge blinked red. Just as hope faded, she saw it — a floating isle hidden in the clouds, supported by ancient turbines. Landing with a thud, she stepped onto solid ground. Lush trees grew here, and carved into stone was the symbol of the Skybound Compass.
+  </p>
+
+  <p>
+    Inside a cavern, she found relics: charts, gearworks, and... her father's logbook. Tears welled up. He had made it. He had lived here. But why hadn’t he returned?
+  </p>
+
+  <p>
+    A whisper echoed. “Leena?”
+  </p>
+
+  <p>
+    She spun around. A man emerged from the mist — older, tired, but unmistakably her father.
+  </p>
+
+  <p>
+    “Dad?” she gasped.
+  </p>
+
+  <p>
+    He nodded, eyes full of emotion. “The compass brought you too. I thought I’d never see you again.”
+  </p>
+
+  <p>
+    He explained how the storm had damaged the Nimbus Hawk, and the compass had led him here — a hidden refuge with power and knowledge from an age long lost. But once the compass was used, it would only activate again when the next worthy explorer arrived.
+  </p>
+
+  <p>
+    Together, they repaired the skiff and copied the secrets from the isle. With the compass now guiding both of them, they flew back to Solara.
+  </p>
+
+  <p>
+    When Leena landed with her father at her side, the city rejoiced. She wasn’t just a mechanic anymore. She was an explorer. And the sky was no longer the limit.
+  </p>
+  <button class="storyBack" onclick="goCards()">← Back</button>
+</div>
+<div id="story33" class="container">
+  <centre >
+  <h1> Whispers of the Hollow Earth</h1>
+</centre>
+  <p>
+    Beneath the icy crust of Antarctica, an ancient secret slumbered — one that had consumed explorers for centuries. Among them now stood Aarav, a young geologist from India, whose grandfather vanished during a 1965 expedition chasing legends of the Hollow Earth.
+  </p>
+
+  <p>
+    Aarav had spent most of his youth piecing together his grandfather’s journals — filled with sketches of creatures, tunnels, and a glowing orb described as “The Heart of Earth.” When he joined an international mission to study geothermal anomalies in the South Pole, he knew it was his chance to finish what was left unfinished.
+  </p>
+<center >
+   <img src="a3.jpg"
+       alt="Hollow Earth Cave">
+</center >
+  <p>
+    After weeks of drilling and descending into the icy depths, his team discovered a cave sealed by crystalized rock. During one night watch, Aarav heard a strange hum coming from the crystals. They pulsed as if alive. He pressed his palm against the wall, and it cracked open, revealing a narrow passage.
+  </p>
+
+  <p>
+    Against orders, Aarav ventured in alone. The tunnel glowed with bioluminescent moss. After hours of crawling downward, he stumbled into a world hidden beneath the earth’s shell. Towering mushrooms lit up the caverns, rivers of glowing lava meandered like veins, and creatures unlike any surface beast roamed freely.
+  </p>
+
+  <p>
+    A piercing screech echoed. From the shadows emerged a beast — half-lizard, half-bird, with feathers made of obsidian. Aarav froze. But before the creature attacked, a cloaked figure blew a horn. The beast retreated.
+  </p>
+
+  <p>
+    The stranger removed her hood. “You don’t belong here, outsider,” she said.
+  </p>
+
+  <p>
+    “My grandfather... Rajan. He was here,” Aarav replied, showing her the old journal.
+  </p>
+
+  <p>
+    Her eyes widened. “Rajan was one of us. He helped us protect the Heart. Come.”
+  </p>
+
+  <p>
+    She led him to an underground citadel where humans who had stayed behind lived in peace with the Hollow Earth’s beings. There, preserved in crystal, was his grandfather — alive, but in stasis. The Heart of Earth, a pulsating orb, kept the energy of the realm balanced. Removing it would awaken the surface volcanoes.
+  </p>
+
+  <p>
+    “He sacrificed his freedom to keep the balance,” she explained.
+  </p>
+
+  <p>
+    Aarav stood before the orb, tempted. He could revive his grandfather — but the world above could suffer.
+  </p>
+
+  <p>
+    Instead, he placed his hand on the crystal surrounding Rajan and whispered, “I understand.” A faint smile crossed his grandfather’s face within the crystal.
+  </p>
+
+  <p>
+    The people of the Hollow Earth gifted Aarav with a sliver of the Heart — enough to study, but not to disrupt. With the cloaked guide’s help, he returned to the surface.
+  </p>
+
+  <p>
+    His story was met with disbelief. Yet, the sample’s energy could not be denied. Aarav didn’t need recognition — he had honored a legacy.
+  </p>
+
+  <p>
+    Every time he looked at the sliver’s faint glow, he heard faint whispers... the voice of the Hollow Earth, reminding him that some adventures aren’t about discovery — they’re about respect.
+  </p>
+  <button class="storyBack" onclick="goCards()">← Back</button>
+</div>
+<div id="story34" class="container">
+  <h1> The Forgotten Island</h1>
+</center >
+  <p>
+    Mira’s heart pounded with anticipation as the small seaplane circled the coordinates she’d decoded from her grandfather’s journal. Beneath her was a stretch of emerald green jungle surrounded by turquoise waters and white sand—an island not found on any map. This was it. The Forgotten Island.
+  </p>
+
+  <p>
+    Her grandfather, a renowned explorer lost decades ago, had always spoken of an island that held secrets predating civilization. Scholars mocked him, dismissing his tales as bedtime stories. But Mira believed. After years of studying his journals, maps, and sketches, she'd finally found what he never could.
+  </p>
+<center >
+   <img src="a4.jpg" 
+       alt="Forgotten Island Adventure">
+</center >
+  <p>
+    The plane dipped low and landed roughly in the shallow waters. Mira jumped into the warm surf, her boots splashing against the sand. The pilot gave her a skeptical look. “I’ll be back in three days,” he shouted over the hum of the propeller. “If you’re not here, I’m leaving.”
+  </p>
+
+  <p>
+    “Fair enough,” Mira replied, slinging her backpack over her shoulder. She turned and walked into the dense foliage, machete in hand.
+  </p>
+
+  <p>
+    The jungle was alive with sounds—chirping birds, buzzing insects, and something else… low, rhythmic thuds, as if drums beat deep within the trees. She pushed forward, guided by intuition and vague landmarks described in the journal. The air grew thick, and shafts of sunlight pierced the canopy above like golden arrows.
+  </p>
+
+  <p>
+    By late afternoon, she stumbled into a clearing. Her breath caught. In front of her stood an ancient stone arch, partially swallowed by vines and moss. Carvings on its surface matched those in her grandfather’s sketches: swirling patterns and animal totems no known civilization had documented.
+  </p>
+
+  <p>
+    Beyond the arch, a stone path led to a towering ziggurat covered in overgrowth. As she climbed the steps, a sudden rustle stopped her. She wasn’t alone.
+  </p>
+
+  <p>
+    A young man emerged from the trees, holding a handcrafted spear. He wore simple woven clothes and markings on his arms. “You shouldn't be here,” he said in accented English.
+  </p>
+
+  <p>
+    “Who are you?” Mira asked, hand instinctively on her machete.
+  </p>
+
+  <p>
+    “I’m Kai. My people have lived here for generations, hidden from the world. We protect the island. You’re not the first to find it, but you may be the first to listen.”
+  </p>
+
+  <p>
+    Mira lowered her blade. “I’m not here to take anything. I only want to understand. My grandfather… he believed this place existed. I think he came here, and never returned.”
+  </p>
+
+  <p>
+    Kai nodded solemnly. “Many come searching for glory, but the island only welcomes those with pure intent. Perhaps it accepted him.”
+  </p>
+
+  <p>
+    Over the next two days, Kai showed Mira the hidden truths of the island—crystal-clear springs with healing properties, bioluminescent caves, and trees that whispered in the wind. She was awestruck. At night, around fires, the elders spoke of how their ancestors had once crossed oceans to flee a collapsing world. This island, protected by reefs and legends, had become their sanctuary.
+  </p>
+
+  <p>
+    On the final day, Mira stood on the ziggurat at sunrise. She felt her grandfather’s presence in every breeze. In her heart, she knew he had found peace here—and now, so had she.
+  </p>
+
+  <p>
+    The pilot returned, just as promised. Mira stepped onto the plane, looking back one last time. The island faded beneath the clouds, once again forgotten—but never by her.
+  </p>
+  
+  <button class="storyBack" onclick="goCards()">← Back</button>
+</div>
+<div id="story35" class="container">
+  <center>
+    <h2> Jungle Map</h2>
+</center >
+  <p>
+    Raj was not your average bookstore clerk. While others lost themselves in bestsellers and dusty encyclopedias, he spent his breaks digging through old donation boxes in the backroom. One rainy afternoon, hidden beneath a pile of torn travel guides and unwanted romance novels, he found something extraordinary — a rolled-up parchment wrapped in oilskin. The edges were crumbling, but the ink remained vivid. It was a map. Not of a city or a coastline — but a jungle. 
+  </p>
+  <p>
+    What caught his eye was the faint symbol in the corner: a roaring tiger head with emerald eyes. He recognized it from his grandfather’s stories — tales of a lost temple deep in the Dandeli jungle, protected by spirits and time. Raj’s grandfather had spent his youth searching for it but had disappeared before ever finding it. The family had assumed he’d lost his way or perhaps chose to disappear. But Raj never believed that.
+  </p>
+  <p>
+    Fueled by memory and mystery, Raj packed his bag, bought a one-way train ticket to Karnataka, and hired a local guide named Bala. Bala was skeptical of ancient maps and temple legends, but Raj's enthusiasm and a generous stack of rupees convinced him.
+  </p>
+  <p>
+    The next morning, they set off, machetes in hand. The jungle welcomed them with a symphony of chirping cicadas, rustling leaves, and the occasional monkey howl. The air was thick and damp, heavy with the scent of earth and moss. As they followed the map’s winding red line, Raj noticed something strange — the landmarks on the map matched almost perfectly. A crooked tree shaped like a trident, a stream that forked into a crescent, a hill that cast a shadow like a crouching cat.
+  </p>
+  <p>
+    On the third day, Bala stopped abruptly. “No further,” he said. “This place... wrong.” Raj followed Bala’s gaze. Vines twisted unnaturally here, forming shapes like symbols. The wind carried a whisper, though no one spoke. The map pulsed slightly in Raj’s pocket. But he couldn’t stop. He gave Bala extra money and thanked him. Bala turned back, muttering a blessing under his breath.
+  </p>
+<center>
+     <img src="a5.jpg" alt="jungle book adventure">
+</center>
+  <p>
+    Alone now, Raj pushed deeper. Night fell quickly. He camped beneath a banyan tree, eyes wide and ears alert. Dreams came — vivid, pulsing dreams of a golden tiger walking beside him, leading him past traps and ruins. When he awoke, the map had new markings — paths that weren’t there before. It didn’t make sense. He hadn’t drawn them. But something told him to trust it.
+  </p>
+  <p>
+    The path led to a moss-covered rock face. Raj pushed aside vines and discovered a door — stone, carved with the same tiger emblem. The map burned hot in his hand. Without hesitation, he pressed it against the symbol. The door groaned, then opened.
+  </p>
+  <p>
+    Inside was the temple. Time had not touched it. Statues of animals lined the halls, torches ignited on their own. In the center stood a stone pedestal holding an orb — green, glowing, alive. Raj stepped forward, but a voice echoed: “Blood of the seeker. Heart of the wild.” It wasn’t a warning. It was a test.
+  </p>
+  <p>
+    He remembered something his grandfather once said: “The jungle is a mirror. It gives only when you respect it.” Raj knelt and placed the map gently beside the orb. “I’m not here to steal. I’m here to understand.” The orb pulsed, then floated into the air, hovering before him.
+  </p>
+  <p>
+    A whirlwind of images filled his mind — his grandfather, older, wise, sitting cross-legged in the jungle, smiling. “You found it, boy,” he whispered. “Now go back. The real treasure is the knowing.”
+  </p>
+  <p>
+    The orb dropped to the pedestal, dimmed. Raj backed away. The torches dimmed too, and the temple began to seal itself. He ran, barely escaping as the stone door slammed shut behind him.
+  </p>
+  <p>
+    Back in the village, Bala was stunned to see him return. “You saw it?” he asked. Raj nodded, offering no proof, just a quiet smile. He returned home, mapless, treasurless — but changed.
+  </p>
+  <p>
+    And some nights, when the moon is full and the breeze rustles the windows just right, Raj dreams of the tiger again — and wonders if the jungle is calling him once more.
+  </p>
+  <button class="storyBack" onclick="goCards()">← Back</button>
+</div>
+
+<!-- big BACK on card page -->
+<button id="backCards" onclick="goHome()">← Back</button>
+
+<script>
+let currentGenre="";
+const hide=sel=>document.querySelectorAll(sel).forEach(el=>el.style.display='none');
+
+function openGenre(g){
+  currentGenre=g;
+  hide('.moving-heading'); hide('.cards-container'); hide('.container');
+  genreButtons.style.display='none';
+  document.getElementById(g+'Heading').style.display='block';
+  document.getElementById('cards-'+g).style.display='grid';
+  backCards.style.display='block';
+}
+
+function openStory(storyId){
+  hide('.cards-container'); hide('.container'); hide('.moving-heading');
+  document.getElementById(currentGenre+'Heading').style.display='block';
+  const s=document.getElementById(storyId);
+  s.style.display='block';
+  s.querySelector('.storyBack').style.display='inline-block';
+  backCards.style.display='none';
+}
+
+function goCards(){
+  hide('.container'); hide('.storyBack'); hide('.moving-heading');
+  document.getElementById('cards-'+currentGenre).style.display='grid';
+  document.getElementById(currentGenre+'Heading').style.display='block';
+  backCards.style.display='block';
+}
+
+function goHome(){
+  hide('.moving-heading'); hide('.cards-container'); backCards.style.display='none';
+  genreButtons.style.display='block';
+  currentGenre="";
+}
+</script>
+</body>
+</html>

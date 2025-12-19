@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>AI Story Generator</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: crimson;
+      color: #f5f5f5;
+      display: flex;
+      transition: background-image 0.6s ease-in-out;
+      background-image: url("malar.jpg");
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-attachment: fixed;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      width: 70px;
+      height: 100vh;
+      background: rgba(179, 0, 0, 0.8);
+      backdrop-filter: blur(6px);
+      position: fixed;
+      left: 0;
+      top: 0;
+      padding: 20px 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: flex-start;
+      transition: width 0.3s ease;
+      border-top-right-radius: 20px;
+      border-bottom-right-radius: 20px;
+      z-index: 1000;
+    }
+
+    .sidebar:hover {
+      width: 220px;
+    }
+
+    .logo {
+      color: #fff;
+      font-size: 22px;
+      margin-bottom: 40px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    .logo i {
+      background: #fff;
+      color: #b30000;
+      padding: 10px;
+      border-radius: 50%;
+    }
+
+    .nav-menu {
+      list-style: none;
+      width: 100%;
+    }
+
+    .nav-menu li {
+      margin: 20px 0;
+    }
+
+    .nav-menu li a {
+      text-decoration: none;
+      color: white;
+      display: flex;
+      align-items: center;
+      font-size: 16px;
+      padding: 12px 15px;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+    }
+
+    .nav-menu li a i {
+      margin-right: 14px;
+      font-size: 18px;
+      min-width: 25px;
+      text-align: center;
+    }
+
+    .nav-menu li a span {
+      opacity: 0;
+      white-space: nowrap;
+      transition: opacity 0.3s ease;
+    }
+
+    .sidebar:hover .nav-menu li a span {
+      opacity: 1;
+    }
+
+    .nav-menu li a:hover {
+      background-color: rgba(255, 255, 255, 0.15);
+      transform: translateX(5px);
+    }
+
+    /* Optional: Responsive behavior */
+    @media (max-width: 600px) {
+      .sidebar {
+        width: 100%;
+        height: auto;
+        flex-direction: row;
+        padding: 10px;
+        border-radius: 0;
+      }
+
+      .sidebar:hover {
+        width: 100%;
+      }
+
+      .nav-menu {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+      }
+
+      .nav-menu li {
+        margin: 0;
+      }
+
+      .nav-menu li a span {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="logo"><i class="fas fa-book-reader"></i>
+      <br>
+  </div>
+    <ul class="nav-menu">
+      <li><a href="demo.html"><i class="fas fa-home"></i><span>Home</span></a></li>
+      <li><a href="index.html"><i class="fas fa-sign-in-alt"></i><span>Log In</span></a></li>
+      <li><a href="aboutus.html"><i class="fas fa-user-friends"></i><span>About Us</span></a></li>
+      <li><a href="chat2.html"><i class="fas fa-robot"></i><span>Chatbot</span></a></li>
+      <li><a href="story2.html"><i class="fas fa-book-reader"></i><span>Story</span></a></li>
+    </ul>
+  </div>
+
+</body>
+</html>
