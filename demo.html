@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MyFlix</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'en,hi,ta,te,ml,fr,es',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+      }, 'google_translate_element');
+    }
+   
+
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</head>
+<body>
+    
+
+
+  <div class="hero">
+    <div class="overlay"></div>
+
+    <header class="navbar">
+      <h1 class="logo">SCRIPTORIA</h1>
+      <div class="actions">
+        <div id="google_translate_element"></div>
+        
+      </div>
+    </header>
+    
+    <div class="center-box">
+      <h1>"A reader lives a thousand lives before he dies <br>The man who never reads lives only one"</h1>
+      <p>Read beyond your Expectations...!</p>
+      <p class="subtitle">Ready to read? Enter your email to get started.</p>
+     <form action="index.html">
+  <button type="submit">Log In</button>
+</form>
+    </div>
+  </div>
+  <div class="line-style-divider"></div>
+
+
+  <section class="card-section">
+    <h2>Top Trending Tales</h2>
+    <div class="card-container">
+      <div class="card">
+        <img src="story1.jpg" alt="Case 1" />
+        <video src="couple.mp4" muted loop autoplay playsinline></video>
+        <span class="rank">1 Love Story<marquee>Two Wheels and a Heartbeat</marquee></span>
+      </div>
+      <div class="card">
+        <img src="moon.jpg" alt="Case 2" />
+        <video src="fantasy.mp4" muted loop autoplay playsinline></video>
+        <span class="rank">2 The Fantasy  <marquee>The Moonstone Prophecy</marquee>
+</span>
+      </div>
+      <div class="card">
+        <img src="shadow-person.jpg" alt="Case 3" />
+        <video src="horror.mp4" muted loop autoplay playsinline></video>
+        <span class="rank">3 Horror<marquee> The Whisper Well</marquee></span>
+      </div>
+      <div class="card">
+        <img src="card.jpeg" alt="Case 4" />
+        <video src="forest1.mp4" muted loop autoplay playsinline></video>
+        <span class="rank">4 Adventure<marquee>Whispers of the wild</marquee></span>
+      </div>
+      <div class="card">
+        <img src="yoga3.jpg" alt="Case 5" />
+        <video src="thrill.mp4" muted loop autoplay playsinline></video>
+        <span class="rank">5 A Thriller Story <marquee>The Cipher Below </marquee></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="info-cards-section">
+    <div class="info-card">
+      <h3>Explore Mysteries</h3>
+      <p>Dive into thrilling unsolved crimes and uncover secrets hidden in shadows.</p>
+    </div>
+    <div class="info-card">
+      <h3>Handpicked Story Genres</h3>
+      <p>We offer a curated collection of select genres — chosen for deep, meaningful reads.</p>
+    </div>
+    <div class="info-card">
+      <h3>Personalized Reading Experience</h3>
+      <p>Smart suggestions based on your interests. Discover gems in your favorite categories.</p>
+    </div>
+    <div class="info-card">
+      <h3>Track Your Progress</h3>
+      <p>Monitor your reading journey, set goals, and build your digital bookshelf.</p>
+    </div>
+  </section>
+
+  <div class="center-box">
+    <h1 class="hero-heading">One Click. Infinite Journeys.</h1>
+    <p class="hero-subtext">Fuel your mind with gripping stories — tailored to you.</p>
+    <p class="subtitle">Just a click to begin your reading journey.</p>
+    <form class="hero-form">
+      <button type="submit">Get Started</button>
+    </form>
+  </div>
+  <script>
+    const cards = document.querySelectorAll('.card');
+    cards.forEach(card => {
+      const video = card.querySelector('video');
+      card.addEventListener('mouseenter', () => {
+        video.play();
+      });
+      card.addEventListener('mouseleave', () => {
+        video.pause();
+        video.currentTime = 0;
+      });
+    });
+  </script>
+</body>
+</html>
